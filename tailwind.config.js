@@ -8,6 +8,20 @@ module.exports = {
     fontFamily: {
       primary: ["Poppins", "sans-serif"],
     },
+    colors: {
+      primary: "#0070FF",
+      primaryAccent: "#D8E9FF",
+      white: "#ffffff",
+      black: "#363636",
+      textSecondary: "#A0A6AD",
+      textPrimary: "#757A80",
+      iconPrimary: "#64687B",
+      surfacePrimary: "#F2F2F2",
+      statusGreen: "#00D100",
+      statusOrange: "#FF9900",
+      statusRed: "#78dcca",
+      statusGreenAccent: "#FF2E00",
+    },
   },
   plugins: [],
 };
