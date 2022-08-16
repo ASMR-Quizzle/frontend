@@ -53,7 +53,7 @@ export default function Home() {
           </div>
           {/* Vector Section */}
           <div className="flex flex-col bg-primary w-1/3 items-center justify-center">
-            <img src="/signinPgVector.png" width="300px" className=""></img>
+            <img src="/signinPgVector.png" width="375px" className=""></img>
             <p className="text-white font-medium text-2xl w-2/3 text-center">
               Just a click here and another there and you are logged in!
             </p>
