@@ -37,9 +37,11 @@ export default function Home() {
                 <div className="my-5 font-normal text-right text-sm text-textPrimary">
                   <a href="#">Forgot Password?</a>
                 </div>
-                <div className="bg-primary flex justify-center py-2 rounded-lg">
-                  <p className="font-semibold text-xl text-white">Sign In</p>
-                </div>
+                <a href="#">
+                  <div className="bg-primary text-white font-semibold text-xl flex justify-center py-2 rounded-lg hover:bg-primaryAccent hover:text-iconPrimary">
+                    Sign In
+                  </div>
+                </a>
                 <p className="text-black pt-3">
                   Don't have an account?
                   <a href="#">
