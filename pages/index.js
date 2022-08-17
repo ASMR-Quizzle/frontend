@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import {
   AddQuestionPNG,
   CrossPNG,
@@ -10,11 +11,26 @@ import {
   SettingsPNG,
 } from '../utils/icon.export.js';
 
-import Head from 'next/head';
-import Image from 'next/image';
-import styles from '../styles/Home.module.css';
+// import Head from 'next/head';
+// import Image from 'next/image';
+// import styles from '../styles/Home.module.css';
+import { QuestionContainer } from '../components/add-questions/questionContainer.js';
 
 export default function Home() {
+  useEffect(() => {
+    if (questionsList.length == 0) {
+      addQuestion();
+    }
+  }, []);
+  const [{ questionsList }, setQuestionsList] = useState({
+    questionsList: [],
+  });
+  const addQuestion = () => {
+    questionsList.push(<QuestionContainer key={questionsList.length} />);
+    setQuestionsList({ questionsList: [...questionsList] });
+    console.log(questionsList);
+  };
+
   return (
     <div className='w-full flex'>
       <div className=' w-1/6 bg-surfacePrimary h-screen'>
@@ -78,45 +94,15 @@ export default function Home() {
       </div>
       <div className=' w-5/6 h-screen px-[141px] my-4'>
         <p className='text-2xl subpixel-antialiased font-bold'>Add Questions</p>
-        <div className='bg-surfacePrimary rounded-md px-8 py-4 my-4'>
-          <p className='text-xl subpixel-antialiased font-bold '>
-            This is an example question
-          </p>
-          <div className='flex flex-wrap space-x-2 space-y-2'>
-            <button className='py-2 px-4 bg-primaryAccent text-primary rounded-md mt-2'>
-              Operating Systems
-              <span className='text-lg font-semibold ml-2 rounded-full '>
-                x
-              </span>
-            </button>
-            <button className='py-2 px-4 bg-primaryAccent text-primary rounded-md mt-2'>
-              <span className='text-lg font-semibold '>+</span> Add Tags
-            </button>
-          </div>
-          <input
-            className='border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 my-4 py-4 px-8 w-[100%] rounded-md'
-            placeholder='Add a description here....'
-          ></input>
-          <div className='flex '>
-            <span className='my-auto mr-4 text-lg font-semibold '>A</span>
-            {/* <div className='w-full'> */}
-            <div className='bg-white flex w-full justify-between rounded-[10px]'>
-              <input
-                className='border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 my-4 px-8 '
-                placeholder='Option A'
-              ></input>
-              <div className='flex mr-6'>
-                <img src={LightCheckPNG.src} className='my-auto mr-4' />
-                <img src={CrossPNG.src} className='my-auto' />
-              </div>
-            </div>
-          </div>
-        </div>
+        {questionsList}
         <div className='flex justify-between mt-5'>
-          <button className='w-[49%] px-4 py-2 text-sm text-primary font-semibold rounded-md bg-primaryAccent '>
+          <button
+            className='w-[49%] py-4 text-base text-primary font-semibold rounded-md bg-primaryAccent '
+            onClick={addQuestion}
+          >
             Add Question
           </button>
-          <button className='w-[49%] px-4 py-2 text-sm text-white font-semibold rounded-md bg-primary '>
+          <button className='w-[49%] py-4 text-base text-white font-semibold rounded-md bg-primary '>
             Submit Questions
           </button>
         </div>
