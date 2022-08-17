@@ -9,7 +9,7 @@ import {
 
 export const Sidebar = () => {
   return (
-    <div className='w-1/6 bg-surfacePrimary h-screen overflow-y-hidden flex-grow'>
+    <div className='w-1/6 bg-surfacePrimary max-h-screen overflow-y-auto flex flex-col flex-grow'>
       <div>
         <img src={LogoPNG.src} className='ml-6 mt-10 mr-auto' />
       </div>

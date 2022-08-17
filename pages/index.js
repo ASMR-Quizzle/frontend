@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <div className='w-full flex h-screen'>
       <Sidebar />
-      <div className=' w-5/6 h-screen px-[141px] my-4'>
+      <div className=' w-5/6 px-[141px] my-4 max-h-screen overflow-y-auto'>
         <p className='text-2xl subpixel-antialiased font-bold'>Add Questions</p>
 
         {questionsList.map((elem, index) => {
