@@ -77,9 +77,9 @@ export default function Signup() {
                   ></input>
                 </div>
               </div>
-              <button className="rounded-lg relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer bg-gradient-to-tr bg-primary text-white">
+              <button className="rounded-lg relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer bg-gradient-to-tr bg-primary text-white">
                 <div className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-full group-hover:h-32 opacity-10"></div>
-                <div className="relative">Create Account</div>
+                <div className="relative font-medium">Create Account</div>
               </button>
               <p className="text-black pt-3">
                 Already have an account?

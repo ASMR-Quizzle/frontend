@@ -29,7 +29,7 @@ export default function Login() {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    className="border-textSecondary border rounded-lg focus:border-primary outline-none mb-3 flex-1 text-textSecondary text-xs font-light px-4 py-3"
+                    className="border-textSecondary border rounded-lg focus:border-primary outline-none flex-1 text-textSecondary text-xs font-light px-4 py-3"
                   ></input>
                 </div>
                 <div className="my-5 font-normal text-right text-sm text-textPrimary">
@@ -37,10 +37,9 @@ export default function Login() {
                     Forgot Password?
                   </a>
                 </div>
-                <button type="submit">
-                  <div className="bg-primary text-white font-semibold text-lg flex justify-center py-2 rounded-lg">
-                    Sign In
-                  </div>
+                <button className="rounded-lg relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer bg-gradient-to-tr bg-primary text-white">
+                  <div className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-full group-hover:h-32 opacity-10"></div>
+                  <div className="relative font-medium">Login</div>
                 </button>
                 <p className="text-black pt-3">
                   Don&apos;t have an account?
