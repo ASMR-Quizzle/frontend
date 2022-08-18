@@ -4,7 +4,6 @@
 
 import Link from "next/link";
 import React from "react";
-
 import { SignInVector } from "../../utils/icon.export.js";
 
 export default function Login() {
@@ -43,7 +42,7 @@ export default function Login() {
                   </a>
                 </div>
                 <button type="submit">
-                  <div className="bg-primary text-white font-semibold text-lg flex justify-center py-2 rounded-lg hover:bg-primaryAccent hover:text-iconPrimary">
+                  <div className="bg-primary text-white font-semibold text-lg flex justify-center py-2 rounded-lg">
                     Sign In
                   </div>
                 </button>

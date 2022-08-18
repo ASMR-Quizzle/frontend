@@ -1,6 +1,5 @@
-import React from "react";
 import Link from "next/link";
-
+import React from "react";
 import { SignUPVector } from "../../utils/icon.export";
 
 export default function Signup() {
@@ -79,7 +78,7 @@ export default function Signup() {
                 </div>
               </div>
               <button type="submit">
-                <div className="bg-primary text-white font-semibold text-lg py-2 rounded-lg hover:bg-primaryAccent hover:text-iconPrimary">
+                <div className="bg-primary text-white font-semibold text-lg py-2 rounded-lg">
                   Create Account
                 </div>
               </button>
