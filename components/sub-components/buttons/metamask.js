@@ -444,7 +444,7 @@ export const Metamask = () => {
           </clipPath>{' '}
         </defs>{' '}
       </svg>
-      Connect with MetaMask
+      Connect Wallet
     </button>
   );
 };
