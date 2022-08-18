@@ -4,17 +4,15 @@ import React, { useState } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
 import { DeleteModal } from '../shared/delete-modal';
 
-export const QuestionContainer = ({
-  question
-}) => {
-//   const [modalIsOpen, setModalIsOpen] = useState(false);
+export const QuestionContainer = ({ question }) => {
+  //   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-//   const toggleModal = () => {
-//     setModalIsOpen(!modalIsOpen);
-//   };
+  //   const toggleModal = () => {
+  //     setModalIsOpen(!modalIsOpen);
+  //   };
 
   return (
-    <div className="bg-surfacePrimary rounded-md px-8 py-4 my-4">
+    <div className='bg-surfacePrimary rounded-md px-8 py-4 my-4'>
       {/* {modalIsOpen ? (
         <DeleteModal
           questionsList={questionsList}
@@ -24,121 +22,30 @@ export const QuestionContainer = ({
           modalIsOpen={modalIsOpen}
         />
       ) : null} */}
-      <div className="flex justify-between">
-        <div className="text-xl font-bold ">{`Question ${question.id} `}</div>
-        {/* <MdDelete
-          className='h-6 w-6 text-statusRed cursor-pointer transition duration-300 ease-in-out transform hover:scale-125 my-auto'
-          onClick={toggleModal}
-        /> */}
+      <div className='flex justify-between'>
+        <div className='text-xl font-bold '>{`Question ${question.id} `}</div>
       </div>
-      <div className="flex flex-wrap space-x-2 space-y-2">
-        <span className="bg-primaryAccent focus:outline-none placeholder-textSecondary placeholder:italic p-1">
+      <div className='flex flex-wrap space-x-2 space-y-2'>
+        <span className='bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none placeholder-textSecondary placeholder:italic py-2 px-4 min-w-fit'>
           {question.topic}
         </span>
-
-        {question.topic.map((ele, i) => {
-          return (
-            <span
-              key={i}
-              className="py-2 px-4 min-w-fit bg-primaryAccent text-primary rounded-md mt-2"
-            >
-              <input
-                type="text"
-                name="tags"
-                index={i}
-                className="bg-primaryAccent focus:outline-none placeholder-textSecondary placeholder:italic p-1"
-              />
-              <span
-                className="text-lg font-semibold ml-2 rounded-full"
-                onClick={() => {
-                  questionsList[questionIndex].tags.splice(i, 1);
-                  setQuestionsList([...questionsList]);
-                }}
-              >
-                x
-              </span>
-            </span>
-          );
-        })}
-        <button
-          className="py-2 px-4 bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none"
-          onClick={addTags}
-        >
-          <span className="text-lg font-semibold ">+</span> Add Tags
-        </button>
       </div>
-      <textarea
-        className="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 my-4 py-4 px-8 w-[100%] rounded-md resize-y grow "
-        rows={5}
-        placeholder="Add your question here"
-        onChange={handleChange}
-        name="description"
-        value={questionsList[questionIndex].description}
-      ></textarea>
-      {questionsList[questionIndex].options.map((ele, i) => {
-        return (
-          <div key={i}>
-            <div className="flex mb-4">
-              <span className="my-auto mr-4 text-lg font-semibold ">
-                {alphabets[i]}
-              </span>
-              <div className="bg-white flex w-full justify-between rounded-[10px]">
-                <input
-                  className="border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 my-4 px-8 focus:outline-none"
-                  placeholder={`Option ${alphabets[i]}`}
-                  name="options"
-                  index={i}
-                  onChange={handleChange}
-                  value={questionsList[questionIndex].options[i]}
-                ></input>
-                <div className="flex mr-2">
-                  {questionsList[questionIndex].answer === i ? (
-                    <div
-                      className="h-10 w-10 bg-statusGreen rounded-md my-auto mr-2"
-                      onClick={() => {
-                        questionsList[questionIndex].answer = -1;
-                        setQuestionsList([...questionsList]);
-                      }}
-                    >
-                      <BsCheckLg className="mx-auto h-5 w-5 my-[0.6rem] text-statusGreenAccent hover:cursor-pointer" />
-                    </div>
-                  ) : (
-                    <div
-                      className="h-10 w-10 bg-statusGreenAccent rounded-md my-auto mr-2"
-                      onClick={() => {
-                        questionsList[questionIndex].answer = i;
-                        setQuestionsList([...questionsList]);
-                      }}
-                    >
-                      <BsCheckLg className="mx-auto h-5 w-5 my-[0.6rem] text-statusGreen hover:cursor-pointer" />
-                    </div>
-                  )}
-                  <MdClear
-                    className="my-auto h-8 w-8 hover:cursor-pointer"
-                    onClick={() => {
-                      questionsList[questionIndex].options.splice(i, 1);
-                      if (questionsList[questionIndex].answer === i) {
-                        questionsList[questionIndex].answer = -1;
-                      }
-                      setQuestionsList([...questionsList]);
-                    }}
-                  />
-                </div>
+      <p className='py-4 w-[100%] grow text-textPrimary'>{question.question}</p>
+
+      <div className='flex mb-4'>
+        {question.A ? (
+          <>
+            <div className='bg-white h-16 w-16 rounded-md mr-4 flex'>
+              <div className='w-full text-center text-lg font-semibold m-auto'>
+                A
               </div>
             </div>
-          </div>
-        );
-      })}
-      {questionsList[questionIndex].options.length >=
-      alphabets.length ? null : (
-        <div
-          className="mt-4 text-primary font-semibold flex justify-end space-x-2 cursor-pointer"
-          onClick={addOption}
-        >
-          <span className="text-lg ">+</span>{" "}
-          <span className="my-auto">Add Option</span>
-        </div>
-      )}
+            <div className='flex w-full justify-between rounded-[10px]'>
+              <p className='text-textPrimary my-auto mx-4'>{question.A}</p>
+            </div>
+          </>
+        ) : null}
+      </div>
     </div>
   );
 };
