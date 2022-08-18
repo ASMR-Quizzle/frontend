@@ -1,7 +1,3 @@
-// import Head from "next/head";
-// import Image from "next/image";
-// import styles from "../../styles/Home.module.css";
-
 import Link from "next/link";
 import React from "react";
 import { SignInVector } from "../../utils/icon.export.js";
@@ -20,24 +16,24 @@ export default function Login() {
                 <p className="font-medium text-xl text-black mb-8">
                   Login to your account to start adding questions
                 </p>
-                <div className="border-textSecondary border rounded-lg flex mb-6">
+                <div className="flex">
                   <input
                     type="email"
                     name="email"
                     placeholder="Email or Phone Number"
-                    className="outline-none m-3 flex-1 text-textSecondary text-xs font-light"
+                    className="border-textSecondary border rounded-lg focus:border-primary outline-none mb-3 flex-1 text-textSecondary text-xs font-light px-4 py-3"
                   ></input>
                 </div>
-                <div className="border-textSecondary border rounded-lg flex">
+                <div className="flex">
                   <input
                     type="password"
                     name="password"
                     placeholder="Password"
-                    className="outline-none m-3 flex-1 text-textSecondary text-xs font-light"
+                    className="border-textSecondary border rounded-lg focus:border-primary outline-none mb-3 flex-1 text-textSecondary text-xs font-light px-4 py-3"
                   ></input>
                 </div>
                 <div className="my-5 font-normal text-right text-sm text-textPrimary">
-                  <a href="#" className="hover:font-extrabold">
+                  <a href="#" className="hover:text-primary">
                     Forgot Password?
                   </a>
                 </div>

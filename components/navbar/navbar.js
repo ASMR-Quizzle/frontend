@@ -1,7 +1,6 @@
-import React from "react";
 import Link from "next/link";
-
 import { LogoPNG } from "../../utils/icon.export.js";
+import React from "react";
 
 export default function Nav() {
   return (
@@ -47,7 +46,7 @@ export default function Nav() {
             <Link href={"/login"}>
               <a
                 href="#"
-                className="inline-block text-xl font-medium lg:px-8 lg:py-2 px-6 py-2 bg-primary rounded-lg text-white hover:bg-primaryAccent hover:text-iconPrimary mt-4 lg:mt-0"
+                className="inline-block text-xl font-medium lg:px-8 lg:py-2 px-6 py-2 bg-primary rounded-lg text-white mt-4 lg:mt-0"
               >
                 Login
               </a>

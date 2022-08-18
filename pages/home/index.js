@@ -1,7 +1,6 @@
-import React from "react";
-import Link from "next/link";
-import Navbar from "../../components/navbar/navbar.js";
 import { LandingVector } from "../../utils/icon.export.js";
+import Navbar from "../../components/navbar/navbar.js";
+import React from "react";
 
 export default function Home() {
   return (
@@ -10,8 +9,10 @@ export default function Home() {
       <div className="flex justify-evenly items-center">
         <div className="flex flex-col ">
           <div className="text-6xl flex flex-col">
-            <span className="text-black font-semibold">The only place</span>
-            <span className="text-primary font-bold my-6">for Questions!</span>
+            <span className="text-black font-bold">The only place</span>
+            <span className="text-primary font-extrabold my-6">
+              for Questions!
+            </span>
           </div>
           <p className="font-normal text-black text-2xl mb-6">
             A crowd sourced question bank

@@ -21,7 +21,7 @@ export const Sidebar = ({ isActive }) => {
             <div
               className={`flex cursor-pointer p-4 ${
                 isActive["profile"] === true
-                  ? "bg-primaryAccent"
+                  ? "bg-slate-300"
                   : "hover:bg-primaryAccent"
               }`}
             >
@@ -38,7 +38,7 @@ export const Sidebar = ({ isActive }) => {
               <div
                 className={`flex cursor-pointer p-4 ${
                   isActive["add_question"] === true
-                    ? "bg-primaryAccent"
+                    ? "bg-slate-300"
                     : "hover:bg-primaryAccent"
                 }`}
               >
@@ -56,7 +56,7 @@ export const Sidebar = ({ isActive }) => {
               <div
                 className={`flex cursor-pointer p-4 ${
                   isActive["my_questions"] === true
-                    ? "bg-primaryAccent"
+                    ? "bg-slate-300"
                     : "hover:bg-primaryAccent"
                 }`}
               >
@@ -73,7 +73,7 @@ export const Sidebar = ({ isActive }) => {
             <div
               className={`flex cursor-pointer p-4 ${
                 isActive["settings"] === true
-                  ? "bg-primaryAccent"
+                  ? "bg-slate-300"
                   : "hover:bg-primaryAccent"
               }`}
             >
@@ -89,7 +89,7 @@ export const Sidebar = ({ isActive }) => {
             <div
               className={`flex cursor-pointer p-4 ${
                 isActive["logout"] === true
-                  ? "bg-primaryAccent"
+                  ? "bg-slate-300"
                   : "hover:bg-primaryAccent"
               }`}
             >
