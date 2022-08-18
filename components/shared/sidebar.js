@@ -7,6 +7,8 @@ import {
   SettingsPNG,
 } from "../../utils/icon.export.js";
 
+import Link from 'next/link';
+
 export const Sidebar = ({ isActive }) => {
   return (
     <div className="w-1/6 bg-surfacePrimary max-h-screen overflow-y-auto flex flex-col flex-grow">
@@ -43,7 +45,9 @@ export const Sidebar = ({ isActive }) => {
                 <img src={AddQuestionPNG.src} alt="add_question" />
               </div>
               <div className="font-normal text-textPrimary text-xl">
-                Add Question
+                <Link href="/add-questions">
+                  <a>Add Question</a>
+                </Link>
               </div>
             </div>
           </li>
@@ -59,7 +63,9 @@ export const Sidebar = ({ isActive }) => {
                 <img src={MyQuestionsPNG.src} alt="my_quesiton" />
               </div>
               <div className="font-normal text-textPrimary text-xl">
-                My Questions
+                <Link href="/my-questions">
+                  <a>My Questions</a>
+                </Link>
               </div>
             </div>
           </li>
