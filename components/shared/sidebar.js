@@ -7,7 +7,7 @@ import {
   SettingsPNG,
 } from "../../utils/icon.export.js";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 export const Sidebar = ({ isActive }) => {
   return (
@@ -21,7 +21,7 @@ export const Sidebar = ({ isActive }) => {
             <div
               className={`flex cursor-pointer p-4 ${
                 isActive["profile"] === true
-                  ? " bg-slate-300"
+                  ? "bg-primaryAccent"
                   : "hover:bg-primaryAccent"
               }`}
             >
@@ -34,46 +34,46 @@ export const Sidebar = ({ isActive }) => {
             </div>
           </li>
           <li>
-            <div
-              className={`flex cursor-pointer p-4 ${
-                isActive["add_question"] === true
-                  ? " bg-slate-300"
-                  : "hover:bg-primaryAccent"
-              }`}
-            >
-              <div className="mr-4 w-8 my-auto">
-                <img src={AddQuestionPNG.src} alt="add_question" />
-              </div>
-              <div className="font-normal text-textPrimary text-xl">
-                <Link href="/add-questions">
+            <Link href="/add-questions">
+              <div
+                className={`flex cursor-pointer p-4 ${
+                  isActive["add_question"] === true
+                    ? "bg-primaryAccent"
+                    : "hover:bg-primaryAccent"
+                }`}
+              >
+                <div className="mr-4 w-8 my-auto ">
+                  <img src={AddQuestionPNG.src} alt="add_question" />
+                </div>
+                <div className="font-normal text-textPrimary text-xl ">
                   <a>Add Question</a>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </li>
           <li>
-            <div
-              className={`flex cursor-pointer p-4 ${
-                isActive["my_questions"] === true
-                  ? " bg-slate-300"
-                  : "hover:bg-primaryAccent"
-              }`}
-            >
-              <div className="mr-4 w-8 my-auto">
-                <img src={MyQuestionsPNG.src} alt="my_quesiton" />
-              </div>
-              <div className="font-normal text-textPrimary text-xl">
-                <Link href="/my-questions">
+            <Link href="/my-questions">
+              <div
+                className={`flex cursor-pointer p-4 ${
+                  isActive["my_questions"] === true
+                    ? "bg-primaryAccent"
+                    : "hover:bg-primaryAccent"
+                }`}
+              >
+                <div className="mr-4 w-8 my-auto">
+                  <img src={MyQuestionsPNG.src} alt="my_quesiton" />
+                </div>
+                <div className="font-normal text-textPrimary text-xl">
                   <a>My Questions</a>
-                </Link>
+                </div>
               </div>
-            </div>
+            </Link>
           </li>
           <li>
             <div
               className={`flex cursor-pointer p-4 ${
                 isActive["settings"] === true
-                  ? " bg-slate-300"
+                  ? "bg-primaryAccent"
                   : "hover:bg-primaryAccent"
               }`}
             >
@@ -89,7 +89,7 @@ export const Sidebar = ({ isActive }) => {
             <div
               className={`flex cursor-pointer p-4 ${
                 isActive["logout"] === true
-                  ? " bg-slate-300"
+                  ? "bg-primaryAccent"
                   : "hover:bg-primaryAccent"
               }`}
             >

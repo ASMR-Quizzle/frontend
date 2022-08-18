@@ -4,7 +4,7 @@ export const QuestionContainer = ({ question }) => {
   return (
     <div className="bg-surfacePrimary rounded-md px-8 py-4 my-4">
       <div className="flex justify-between">
-        <div className="text-xl font-bold ">{`Question ${question.id} `}</div>
+        <div className="text-xl font-bold ">{`Question ID ${question.id} `}</div>
       </div>
       <div className="flex flex-wrap space-x-2 space-y-2">
         <span className="bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none placeholder-textSecondary placeholder:italic py-2 px-4 min-w-fit">
@@ -116,16 +116,25 @@ export const QuestionContainer = ({ question }) => {
         ) : null}
       </div>
 
-      <div className="w-full my-4 flex">
-        <p className="ml-auto">
+      <div className="w-full my-4 flex flex-row mt-8">
+        <div className="w-2/3 flex flex-row">
+          <p className="mr-4 font-bold text-lg my-auto">Difficulty: </p>
+          <div className="flex-grow my-auto bg-slate-300 rounded-full h-2.5 mr-8">
+            <div
+              className="bg-primary h-2.5 rounded-full"
+              style={{ width: `${question.difficulty_score}%` }}
+            ></div>
+          </div>
+        </div>
+        <p>
           <span className="font-bold text-lg">Status:</span>{" "}
-          {question.status === "Not Reviewed" ? (
+          {question.status === "NOT REVIEWED" ? (
             <span className="text-lg text-primary">Not Reviewed</span>
-          ) : question.status === "Under Review" ? (
+          ) : question.status === "UNDER REVIEW" ? (
             <span className="text-lg text-statusOrange">Under Review</span>
-          ) : question.status === "Accepted" ? (
+          ) : question.status === "ACCEPTED" ? (
             <span className="text-lg text-statusGreen">Accepted</span>
-          ) : question.status === "Rejected" ? (
+          ) : question.status === "REJECTED" ? (
             <span className="text-lg text-statusRed">Rejected</span>
           ) : (
             <span className="text-lg text-slate-500">N/A</span>

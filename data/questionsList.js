@@ -15,7 +15,8 @@ const questionsList = [
     usage_score: 0,
     topic_id: 2,
     topic: "Chemistry",
-    status: "Under Review",
+    status: "UNDER REVIEW",
+    reviewers: [],
   },
   {
     id: 9,
@@ -33,7 +34,8 @@ const questionsList = [
     usage_score: 0,
     topic_id: 3,
     topic: "Maths",
-    status: "Accepted",
+    status: "ACCEPTED",
+    reviewers: [],
   },
   {
     id: 10,
@@ -51,10 +53,11 @@ const questionsList = [
     usage_score: 0,
     topic_id: 3,
     topic: "Maths",
-    status: "Rejected",
+    status: "REJECTED",
+    reviewers: [],
   },
   {
-    id: 10,
+    id: 11,
     setter_id: 3,
     reviewer_id: null,
     question: "This is an example description",
@@ -69,7 +72,8 @@ const questionsList = [
     usage_score: 0,
     topic_id: 3,
     topic: "Maths",
-    status: "Not Reviewed",
+    status: "NOT REVIEWED",
+    reviewers: [],
   },
 ];
 
