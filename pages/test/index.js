@@ -9,6 +9,7 @@ const ChooseRole = () => {
     <div>
       <CountdownTimer />
       <ProfileNavbar />
+
       <div className='w-full px-36 max-h-screen'>
         {testQuestions
           ? testQuestions.map((question, questionIndex) => {
@@ -21,9 +22,15 @@ const ChooseRole = () => {
               );
             })
           : null}
-        <button className='w-full my-4 py-4 text-base text-white font-semibold rounded-md bg-primary '>
-          Submit Test
-        </button>
+        <div className='flex justify-between'>
+          <button className='w-full my-4 py-4 mr-2 text-base text-white font-semibold rounded-md bg-primary '>
+            Submit Test
+          </button>
+
+          <button className='w-full my-4 py-4 ml-2 text-base text-white font-semibold rounded-md bg-statusRed'>
+            End Test
+          </button>
+        </div>
       </div>
     </div>
   );
