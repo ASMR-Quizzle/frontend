@@ -1,10 +1,20 @@
-import { Sidebar } from '../../components/shared/sidebar';
 import { FaUser } from 'react-icons/fa';
+import { useState } from 'react';
+import Link from 'next/link';
 import { Metamask } from '../../components/sub-components/buttons/metamask';
+import { Sidebar } from '../../components/shared/sidebar';
 import { Slider } from '../../components/sub-components/carousel/carousel';
+import { TestStartModal } from '../../components/test/testStartModal';
 export default function Home() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const toggleModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
   return (
     <div className='w-full flex h-screen'>
+      {modalIsOpen ? (
+        <TestStartModal toggleModal={toggleModal} modalIsOpen={modalIsOpen} />
+      ) : null}
       <Sidebar isActive={{ profile: true }} />
       <div className=' w-5/6 px-[141px] max-h-screen overflow-y-auto flex flex-row my-3'>
         <div className='flex flex-col justify-center w-1/2 bg-surfacePrimary rounded-md py-4 px-2 '>
@@ -83,35 +93,41 @@ export default function Home() {
         </div>
         <div className='w-1/2 flex flex-col '>
           <div className='h-1/3 bg-surfacePrimary rounded-md px-8 mb-2 py-2 mx-2 flex flex-col justify-evenly'>
-            <p className='text-2xl font-bold mt-8'>My Roles</p>
-            <div className='my-8 flex flex-col justify-between '>
-              <div className='flex justify-between my-4'>
-                <div className='flex flex-col my-auto'>
-                  <span className='text-xl  font-bold '>Question Setter</span>
-                  <button className='  text-primary  transition duration-150 border-b-2 border-transparent hover:underline hover:decoration-2 mr-auto'>
-                    Your Eligible Topics
-                  </button>
-                </div>
-                <button className='px-4 py-2 text-base text-white font-semibold rounded-md bg-primary'>
-                  Take a Test Now!
-                </button>
+            <p className='text-2xl font-extrabold mt-2'>My Roles</p>
+            <div className='my-8 flex flex-row justify-between '>
+              {/* <div className='flex flex-col justify-between w-full'> */}
+              <div className='flex flex-col my-auto '>
+                <span className='text-xl text-center font-bold'>
+                  Question Setter
+                </span>
+                <a className='text-primary w-full text-center transition duration-150 border-b-2 border-transparent hover:underline hover:decoration-2 mr-auto cursor-pointer'>
+                  <p>Your Eligible Topics</p>
+                </a>
               </div>
-              <div className='flex justify-between'>
-                <div className='flex flex-col my-auto'>
-                  <span className='text-xl font-bold '>Question Reviewer</span>
-                  <button className='text-primary  transition duration-150 border-b-2 border-transparent hover:underline hover:decoration-2 mr-auto'>
-                    Your Eligible Topics
-                  </button>
-                </div>
-                <button className='px-4 py-4 text-base text-white font-semibold rounded-md bg-primary'>
-                  Take a Test Now!
-                </button>
+              {/* </div> */}
+              {/* <div className='flex justify-between w-full'> */}
+              <div className='flex flex-col my-auto '>
+                <span className='text-xl text-center font-bold'>
+                  Question Reviewer
+                </span>
+                <a className='text-primary w-full text-center transition duration-150 border-b-2 border-transparent hover:underline hover:decoration-2 mr-auto cursor-pointer'>
+                  <p>Your Eligible Topics</p>
+                </a>
               </div>
             </div>
+
+            <button
+              className='px-4 py-2 text-base text-white font-semibold rounded-md bg-primary'
+              onClick={toggleModal}
+            >
+              Take a Test Now!
+            </button>
+
+            {/* </div> */}
           </div>
           <div className='h-1/3 bg-surfacePrimary rounded-md px-8 mb-2 py-2 mx-2 flex flex-col justify-evenly'>
             <div className='flex justify-between'>
-              <p className='text-2xl font-bold  my-auto'>Rewards</p>
+              <p className='text-2xl font-extrabold  my-auto'>My Rewards</p>
               <Metamask />
             </div>
             <div className='my-8 px-8 '>
@@ -120,7 +136,7 @@ export default function Home() {
           </div>
           <div className='h-1/3 bg-surfacePrimary rounded-md px-8 py-2 mx-2 flex flex-col justify-evenly'>
             <div className='flex flex-col '>
-              <p className='text-2xl font-bold  my-auto'>Stats</p>
+              <p className='text-2xl font-extrabold  my-auto'>My Statistics</p>
               <div className='my-8'>
                 <div className='flex justify-between my-4'>
                   <span className='text-xl font-semibold '>

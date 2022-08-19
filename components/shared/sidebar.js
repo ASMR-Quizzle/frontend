@@ -1,51 +1,30 @@
-import {
-  AddQuestionPNG,
-  LogoPNG,
-  LogoutPNG,
-  MyQuestionsPNG,
-  ProfilePNG,
-  SettingsPNG,
-} from '../../utils/icon.export.js';
-
+import { BsPlusLg } from 'react-icons/bs';
+import { FaClipboardList } from 'react-icons/fa';
+import { FaUserAlt } from 'react-icons/fa';
+import { IoMdSettings } from 'react-icons/io';
 import Link from 'next/link';
+import { MdOutlineExitToApp } from 'react-icons/md';
+import { QuizzleLogo } from '../../utils/icon.export.js';
 
 export const Sidebar = ({ isActive }) => {
   return (
-    <div className='w-1/6 bg-surfacePrimary max-h-screen overflow-y-auto flex flex-col flex-grow'>
-      <div>
-        <img src={LogoPNG.src} className='ml-6 mt-10 mr-auto' />
+    <div className='w-1/6 bg-surfacePrimary max-h-screen overflow-y-auto flex flex-col flex-grow h-full'>
+      <div className='ml-8'>
+        <img src={QuizzleLogo.src} className='mt-10 h-12' />
       </div>
-      <div className='mt-16'>
-        <ul className='list-none '>
-          <li>
-            <Link href='/profile'>
-              <div
-                className={`flex cursor-pointer p-4 ${
-                  isActive['profile'] === true
-                    ? 'bg-slate-300'
-                    : 'hover:bg-primaryAccent'
-                }`}
-              >
-                <div className='mr-4 w-8 my-auto'>
-                  <img src={ProfilePNG.src} alt='profile' />
-                </div>
-                <div className='font-normal text-textPrimary text-xl'>
-                  Profile
-                </div>
-              </div>
-            </Link>
-          </li>
+      <div className='mt-8'>
+        <ul className='list-none'>
           <li>
             <Link href='/add-questions'>
               <div
-                className={`flex cursor-pointer p-4 ${
+                className={`flex cursor-pointer p-4 pl-8 ${
                   isActive['add_question'] === true
                     ? 'bg-slate-300'
                     : 'hover:bg-primaryAccent'
                 }`}
               >
                 <div className='mr-4 w-8 my-auto '>
-                  <img src={AddQuestionPNG.src} alt='add_question' />
+                  <BsPlusLg className='text-textPrimary h-5 w-5' />
                 </div>
                 <div className='font-normal text-textPrimary text-xl '>
                   <a>Add Question</a>
@@ -56,14 +35,14 @@ export const Sidebar = ({ isActive }) => {
           <li>
             <Link href='/my-questions'>
               <div
-                className={`flex cursor-pointer p-4 ${
+                className={`flex cursor-pointer p-4 pl-8 ${
                   isActive['my_questions'] === true
                     ? 'bg-slate-300'
                     : 'hover:bg-primaryAccent'
                 }`}
               >
                 <div className='mr-4 w-8 my-auto'>
-                  <img src={MyQuestionsPNG.src} alt='my_quesiton' />
+                  <FaClipboardList className='text-textPrimary h-6 w-6' />
                 </div>
                 <div className='font-normal text-textPrimary text-xl'>
                   <a>My Questions</a>
@@ -73,30 +52,52 @@ export const Sidebar = ({ isActive }) => {
           </li>
           <li>
             <div
-              className={`flex cursor-pointer p-4 ${
+              className={`flex cursor-pointer p-4 pl-8 ${
                 isActive['settings'] === true
                   ? 'bg-slate-300'
                   : 'hover:bg-primaryAccent'
               }`}
             >
               <div className='mr-4 w-8 my-auto'>
-                <img src={SettingsPNG.src} alt='settings' />
+                <IoMdSettings className='text-textPrimary h-6 w-6' />
               </div>
               <div className='font-normal text-textPrimary text-xl my-auto'>
                 Settings
               </div>
             </div>
           </li>
+        </ul>
+      </div>
+      <div className='mt-auto mb-8'>
+        <ul className='list-none'>
+          <li>
+            <Link href='/profile'>
+              <div
+                className={`flex cursor-pointer p-4 pl-8 ${
+                  isActive['profile'] === true
+                    ? 'bg-slate-300'
+                    : 'hover:bg-primaryAccent'
+                }`}
+              >
+                <div className='mr-4 w-8 my-auto'>
+                  <FaUserAlt className='text-textPrimary h-5 w-5' />
+                </div>
+                <div className='font-normal text-textPrimary text-xl'>
+                  Profile
+                </div>
+              </div>
+            </Link>
+          </li>
           <li>
             <div
-              className={`flex cursor-pointer p-4 ${
+              className={`flex cursor-pointer p-4 pl-8 ${
                 isActive['logout'] === true
                   ? 'bg-slate-300'
                   : 'hover:bg-primaryAccent'
               }`}
             >
               <div className='mr-4 w-8 my-auto'>
-                <img src={LogoutPNG.src} alt='login' />
+                <MdOutlineExitToApp className='text-textPrimary h-6 w-6' />
               </div>
               <div className='font-normal text-textPrimary text-xl'>Logout</div>
             </div>
