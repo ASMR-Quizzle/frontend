@@ -61,9 +61,11 @@ export const Sidebar = ({ isActive }) => {
               <div className='mr-4 w-8 my-auto'>
                 <IoMdSettings className='text-textPrimary h-6 w-6' />
               </div>
-              <div className='font-normal text-textPrimary text-xl my-auto'>
-                Settings
-              </div>
+              <Link href='/settings'>
+                <div className='font-normal text-textPrimary text-xl my-auto'>
+                  Settings
+                </div>
+              </Link>
             </div>
           </li>
         </ul>
