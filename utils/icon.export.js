@@ -1,6 +1,7 @@
 import AddQuestionPNG from '../assets/icons/add_question.png';
 import CrossPNG from '../assets/icons/cross.png';
 import DarkCheckPNG from '../assets/icons/dark_check.png';
+import InsituteSignInVector from '../assets/vectors/instituteLoginPgVector.svg';
 import LandingVector from '../assets/vectors/landingPgVector.png';
 import LightCheckPNG from '../assets/icons/light_check.png';
 import LogoutPNG from '../assets/icons/logout.png';
@@ -10,7 +11,6 @@ import QuizzleLogo from '../assets/images/quizzle-logo.svg';
 import SettingsPNG from '../assets/icons/settings.png';
 import SignInVector from '../assets/vectors/signinPgVector.png';
 import SignUPVector from '../assets/vectors/signupPgVector.png';
-
 export {
   AddQuestionPNG,
   LogoutPNG,
@@ -24,4 +24,5 @@ export {
   SignInVector,
   SignUPVector,
   LandingVector,
+  InsituteSignInVector,
 };

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export const CountdownTimer = () => {
   const calculateTimeLeft = () => {
-    const difference = +new Date('2022-08-21T18:20:00+05:30') - +new Date();
+    const difference = +new Date() - +new Date(); //'2022-08-21T18:20:00+05:30'
     let timeLeft = {};
 
     if (difference > 0) {
@@ -37,7 +37,7 @@ export const CountdownTimer = () => {
             <span className='text-xl font-extrabold'>{timeLeft.seconds}</span>
           </p>
         ) : (
-          <p>Time is up 🔥</p>
+          <p>Time&apos;s Up</p>
         )}
       </div>
     </div>

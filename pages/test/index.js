@@ -1,8 +1,8 @@
+import { CountdownTimer } from '../../components/sub-components/countdown/CountdownTimer';
 import { ProfileNavbar } from '../../components/shared/profile-navbar';
 import { QuestionContainer } from '../../components/test/questionContainer';
 import React from 'react';
 import testQuestions from '../../data/testQuestions';
-import { CountdownTimer } from '../../components/sub-components/countdown/CountdownTimer';
 
 const ChooseRole = () => {
   return (
