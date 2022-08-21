@@ -4,7 +4,7 @@ import { FaUserAlt } from 'react-icons/fa';
 import { IoMdSettings } from 'react-icons/io';
 import Link from 'next/link';
 import { MdOutlineExitToApp } from 'react-icons/md';
-import { MdPreview } from 'react-icons/md';
+import { MdRateReview } from 'react-icons/md';
 import { QuizzleLogo } from '../../utils/icon.export.js';
 
 export const Sidebar = ({ isActive }) => {
@@ -61,7 +61,7 @@ export const Sidebar = ({ isActive }) => {
                 }`}
               >
                 <div className='mr-4 w-8 my-auto'>
-                  <MdPreview className='text-textPrimary h-6 w-6' />
+                  <MdRateReview className='text-textPrimary h-6 w-6' />
                 </div>
                 <div className='font-normal text-textPrimary text-xl'>
                   <a>Review Questions</a>
