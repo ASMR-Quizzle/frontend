@@ -15,13 +15,6 @@ export default function MyQuestions() {
           My Questions
         </p>
 
-        {/* {questionsList
-          ? questionsList.map((question) => {
-              return (
-                <QuestionContainer key={question.id} question={question} />
-              );
-            })
-          : null} */}
         <Tab.Group>
           <Tab.List className='flex mt-4 space-x-1 rounded-xl bg-primaryAccent p-1'>
             <Tab

@@ -78,7 +78,7 @@ export const QuestionContainer = ({
                 type='text'
                 name='tags'
                 index={i}
-                className='bg-primaryAccent focus:outline-none placeholder-textSecondary placeholder:italic p-1'
+                className='bg-primaryAccent focus:outline-none placeholder:font-medium placeholder-textSecondary p-1'
                 onChange={handleChange}
                 value={questionsList[questionIndex].tags[i]}
                 placeholder='Enter Tag'
@@ -119,7 +119,7 @@ export const QuestionContainer = ({
               </span>
               <div className='bg-white flex w-full justify-between rounded-[10px]'>
                 <input
-                  className='border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 my-4 px-8 focus:outline-none'
+                  className='border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 my-4 px-8 focus:outline-none w-full'
                   placeholder={`Option ${alphabets[i]}`}
                   name='options'
                   index={i}

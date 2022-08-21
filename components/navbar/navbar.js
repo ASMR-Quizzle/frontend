@@ -16,23 +16,24 @@ export default function Nav() {
                 Home
               </a>
             </Link>
-            <a
-              href='#'
-              className='block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-6 text-xl cursor-pointer'
-            >
-              About Us
-            </a>
+            <Link href='/about'>
+              <a className='block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-6 text-xl cursor-pointer'>
+                About Us
+              </a>
+            </Link>
             <Link href='/institute-login'>
               <a className='block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-6 text-xl cursor-pointer'>
                 Collaborate
               </a>
             </Link>
-            <a
-              href='#'
-              className='block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-6 text-xl cursor-pointer'
-            >
-              Contact Us
-            </a>
+            <Link href='/contact'>
+              <a
+                href='#'
+                className='block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary mr-6 text-xl cursor-pointer'
+              >
+                Contact Us
+              </a>
+            </Link>
             <a
               href='#'
               className='block mt-4 lg:inline-block lg:mt-0 text-black hover:text-primary text-xl cursor-pointer'

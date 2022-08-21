@@ -1,15 +1,23 @@
-import { FaUser } from 'react-icons/fa';
-import { useState } from 'react';
+import * as style from '@dicebear/avatars-jdenticon-sprites';
+
 import Link from 'next/link';
 import { Metamask } from '../../components/sub-components/buttons/metamask';
 import { Sidebar } from '../../components/shared/sidebar';
 import { Slider } from '../../components/sub-components/carousel/carousel';
 import { TestStartModal } from '../../components/test/testStartModal';
+import { createAvatar } from '@dicebear/avatars';
+import { useState } from 'react';
+
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
+
+  let svg = createAvatar(style, {
+    seed: 'atharva',
+  });
+  console.log(svg);
   return (
     <div className='w-full flex h-screen'>
       {modalIsOpen ? (
@@ -18,7 +26,10 @@ export default function Home() {
       <Sidebar isActive={{ profile: true }} />
       <div className=' w-5/6 px-[141px] max-h-screen overflow-y-auto flex flex-row my-3'>
         <div className='flex flex-col justify-center w-1/2 bg-surfacePrimary rounded-md py-4 px-2 '>
-          <FaUser className='w-32 h-32 mx-auto rounded-lg mb-8 text-textSecondary' />
+          <div
+            className='w-36 h-36 mx-auto rounded-full mb-8 p-6 bg-white border-4 border-primaryAccent '
+            dangerouslySetInnerHTML={{ __html: svg }}
+          ></div>
           <form className='w-full max-w-lg mx-auto'>
             <div className='flex flex-wrap mb-6'>
               <div className='w-full md:w-1/2 px-3 mb-6 md:mb-0'>

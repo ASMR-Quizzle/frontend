@@ -7,7 +7,7 @@ export default function Home() {
     <div className='flex flex-col font-primary w-full min-h-screen justify-between'>
       <Navbar />
       <div className='flex justify-evenly items-center'>
-        <div className='flex flex-col '>
+        <div className='flex flex-col'>
           <div className='text-6xl flex flex-col'>
             <span className='text-black font-bold'>The only place</span>
             <span className='text-primary font-extrabold my-6'>

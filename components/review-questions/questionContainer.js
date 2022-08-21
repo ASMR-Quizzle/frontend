@@ -137,7 +137,7 @@ export const QuestionContainer = ({ question }) => {
               setDifficulty(e.target.value);
             }}
           ></input>
-          <p className='w-1/12'>{difficulty}</p>
+          <p className='w-1/12 my-auto'>{difficulty}</p>
         </div>
         <div className='w-auto flex mt-2'>
           <p className='w-1/5 mr-4 font-bold text-lg my-auto'>
@@ -154,7 +154,7 @@ export const QuestionContainer = ({ question }) => {
               setAcceptance(e.target.value);
             }}
           ></input>
-          <p className='w-1/12'>{acceptance}</p>
+          <p className='w-1/12 my-auto'>{acceptance}</p>
         </div>
       </div>
 
