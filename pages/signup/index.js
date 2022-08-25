@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
+import { BASE_URL } from '../../utils/types';
 import Link from 'next/link';
 import { SignUPVector } from '../../utils/icon.export';
-import axiosInstance from '../../utils/axiosInstance';
+import axios from 'axios';
 import { login } from '../../utils/routes';
 
-// import axios from "axios";
-
 export default function Signup() {
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm({
-  //   mode:'onChange'
-  // });
-
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -40,15 +30,15 @@ export default function Signup() {
     } else {
       setError('');
     }
-    axiosInstance
-      .post('/user/register', formData)
+    axios
+      .post(BASE_URL + '/user/register', formData)
       .then((res) => {
         login(res);
         window.location.pathname = '/profile';
       })
       .catch((err) => {
         console.log(err);
-      }) 
+      });
     console.log(formData);
   };
 
@@ -145,14 +135,14 @@ export default function Signup() {
                   </div>
                 </div>
                 <div>{error}</div>
-                  <button
-                    type='submit'
-                    className='rounded-lg relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer bg-gradient-to-tr bg-primary text-white w-full'
-                    onChange={handleFormSubmit}
-                  >
-                    <div className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-full group-hover:h-32 opacity-10'></div>
-                    <div className='relative font-medium'>Create Account</div>
-                  </button>
+                <button
+                  type='submit'
+                  className='rounded-lg relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer bg-gradient-to-tr bg-primary text-white w-full'
+                  onChange={handleFormSubmit}
+                >
+                  <div className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-full group-hover:h-32 opacity-10'></div>
+                  <div className='relative font-medium'>Create Account</div>
+                </button>
               </form>
               <p className='text-black pt-3'>
                 Already have an account?

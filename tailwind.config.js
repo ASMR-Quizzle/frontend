@@ -21,6 +21,7 @@ module.exports = {
         statusGreen: '#00D100',
         statusOrange: '#FF9900',
         statusRed: '#FF2E00',
+        statusRedAccent: '#FFCDD2',
         statusGreenAccent: '#CBFFCB',
       },
     },
