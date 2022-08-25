@@ -172,7 +172,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             return (
               <button
                 key={i}
-                className='p-1 min-w-fit bg-primaryAccent text-primary rounded-md mt-2'
+                className='p-1 min-w-fit bg-primaryAccent text-primary rounded-md mt-2 mr-2'
               >
                 <input
                   type='text'
@@ -211,7 +211,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             return (
               <button
                 key={i}
-                className='p-1 min-w-fit bg-statusRedAccent text-statusRed rounded-md mt-2'
+                className='p-1 min-w-fit bg-statusRedAccent text-statusRed rounded-md mt-2 mr-2'
               >
                 <input
                   type='text'
