@@ -1,14 +1,14 @@
 import axios from 'axios';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY, REFRESH_ENDPOINT } from './types';
 
-const baseUrl = '';
-const REFRESH_ENDPOINT = '';
+const baseUrl = 'http://localhost:8000';
 
 const axiosInstance = axios.create({
   baseURL: baseUrl,
   timeout: 50000,
   headers: {
-    Authorization: localStorage.getItem('access_token')
-      ? 'JWT ' + localStorage.getItem('access_token')
+    Authorization: sessionStorage.getItem(ACCESS_TOKEN_KEY)
+      ? 'JWT ' + sessionStorage.getItem(ACCESS_TOKEN_KEY)
       : null,
     'Content-Type': 'application/json',
     accept: 'application/json'
@@ -43,7 +43,7 @@ axiosInstance.interceptors.response.use(
 			error.response.status === 401 &&
 			error.response.statusText === 'Unauthorized'
     ) {
-      const refreshToken = localStorage.getItem('refresh_token');
+      const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
 
       if (refreshToken) {
         const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
@@ -56,16 +56,16 @@ axiosInstance.interceptors.response.use(
               refresh: refreshToken
             })
             .then((response) => {
-              localStorage.setItem('access_token', response.data.access);
-              localStorage.setItem('refresh_token', response.data.refresh);
+              localStorage.setItem(ACCESS_TOKEN_KEY, response.data.access);
+              localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refresh);
 
               axiosInstance.defaults.headers['Authorization'] = 'JWT ' + response.data.access;
               orignalRequest.headers['Authorization'] = 'JWT ' + response.data.access;
 
               return axiosInstance(orignalRequest);
             })
-            .catch((error) => {
-              console.log(error);
+            .catch((err) => {
+              console.log(err);
             })
         } else {
           window.location.href = '/login';

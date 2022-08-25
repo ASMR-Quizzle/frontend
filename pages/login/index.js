@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import axiosInstance from '../../utils/axiosInstance';
+import MetaTagsComponent from '../../components/meta-tags-component';
 
 import Link from 'next/link';
 import { SignInVector } from '../../utils/icon.export.js';
@@ -14,9 +16,19 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(formData);
+
+    axiosInstance
+      .post('/auth/login', formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   };
 
   return (
+    <MetaTagsComponent page="Login">
     <div className='flex flex-col font-primary'>
       <main className='flex flex-col'>
         {/* full screen block */}
@@ -89,5 +101,6 @@ export default function Login() {
         </div>
       </main>
     </div>
+    </MetaTagsComponent>
   );
 }
