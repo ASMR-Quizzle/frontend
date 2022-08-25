@@ -4,32 +4,41 @@ import { Menu, Transition } from '@headlessui/react';
 import { FiChevronDown } from 'react-icons/fi';
 import { QuestionContainer } from '../../components/review-questions/questionContainer';
 import { Sidebar } from '../../components/shared/sidebar';
+import axiosInstance from '../../utils/axiosInstance';
 import reviewQuestions from '../../data/reviewQuestions';
 
 export default function Home() {
   const [selection, setSelection] = useState('All Topics');
-
-  const topics = ['Physics', 'Chemistry', 'Maths'];
+  const [reviewQuestions, setReviewQuestions] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const [filteredQuestions, setFilteredQuestions] = useState([]);
 
   const handleSelection = (e) => {
-    console.log(e.target.value);
     setSelection(e.target.value);
-    console.log(selection);
+    setFilteredQuestions(
+      reviewQuestions.filter(
+        (question) =>
+          question.topics.includes(e.target.value) &&
+          !filteredQuestions.includes(question)
+      )
+    );
+    if (selection == 'All Topics') {
+      setFilteredQuestions(reviewQuestions);
+      return;
+    }
   };
 
-  const filter_reviewQuestions = reviewQuestions.filter((question) => {
-    if (selection === 'Maths') {
-      return question.topic === 'Maths';
-    } else if (selection === 'Chemistry') {
-      return question.topic === 'Chemistry';
-    } else if (selection === 'Physics') {
-      return question.topic === 'Physics';
-    } else {
-      return question;
-    }
-  });
-
-  console.log(filter_reviewQuestions);
+  useEffect(() => {
+    axiosInstance.get('/question/review').then((res) => {
+      setReviewQuestions(res.data.data);
+      setFilteredQuestions(res.data.data);
+      console.log(res.data.data);
+    });
+    axiosInstance.get('/question/topics').then((res) => {
+      setTopics(res.data.data);
+      console.log(res.data.data);
+    });
+  }, [setReviewQuestions, setTopics]);
 
   return (
     <div className='w-full flex h-screen'>
@@ -63,14 +72,14 @@ export default function Home() {
             >
               <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                 <div className='px-1 py-1 '>
-                  <Menu.Item>
+                  <Menu.Item value={'All Topics'}>
                     {({ active }) => (
                       <button
                         className={`${
                           active ? 'bg-primary text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                        onClick={() => {
-                          setSelection('All Topics');
+                        onClick={(e) => {
+                          handleSelection(e);
                         }}
                       >
                         All Topics
@@ -81,17 +90,17 @@ export default function Home() {
                 <div className='px-1 py-1 '>
                   {topics.map((topic, index) => {
                     return (
-                      <Menu.Item key={index}>
+                      <Menu.Item value={topic.name} key={topic.id}>
                         {({ active }) => (
                           <button
                             className={`${
                               active ? 'bg-primary text-white' : 'text-gray-900'
                             } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                            onClick={() => {
-                              setSelection(topic);
+                            onClick={(e) => {
+                              handleSelection(e);
                             }}
                           >
-                            {topic}
+                            {topic.name}
                           </button>
                         )}
                       </Menu.Item>
@@ -102,13 +111,16 @@ export default function Home() {
             </Transition>
           </Menu>
         </div>
-        {filter_reviewQuestions
-          ? filter_reviewQuestions.map((question) => {
-              return (
-                <QuestionContainer key={question.id} question={question} />
-              );
-            })
-          : null}
+        {filteredQuestions.map((question, idx) => {
+          return (
+            <QuestionContainer
+              key={question.id}
+              questionIdx={idx}
+              questions={filteredQuestions}
+              setQuestion={setFilteredQuestions}
+            />
+          );
+        })}
       </div>
     </div>
   );

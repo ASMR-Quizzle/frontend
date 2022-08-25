@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../utils/axiosInstance';
-import MetaTagsComponent from '../../components/meta-tags-component';
 
 import Link from 'next/link';
+import MetaTagsComponent from '../../components/meta-tags-component';
 import { SignInVector } from '../../utils/icon.export.js';
+import axiosInstance from '../../utils/axiosInstance';
 import { login } from '../../utils/routes';
 
 export default function Login() {
@@ -26,12 +26,12 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   };
 
   return (
     <>
-      <MetaTagsComponent page="Login" />
+      <MetaTagsComponent page='Login' />
       <div className='flex flex-col font-primary'>
         <main className='flex flex-col'>
           {/* full screen block */}

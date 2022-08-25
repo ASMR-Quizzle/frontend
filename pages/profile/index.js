@@ -1,13 +1,14 @@
 import * as style from '@dicebear/avatars-jdenticon-sprites';
 
+import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
 import { Metamask } from '../../components/sub-components/buttons/metamask';
 import { Sidebar } from '../../components/shared/sidebar';
 import { Slider } from '../../components/sub-components/carousel/carousel';
 import { TestStartModal } from '../../components/test/testStartModal';
-import { createAvatar } from '@dicebear/avatars';
-import { useEffect, useState } from 'react';
 import axiosInstance from '../../utils/axiosInstance';
+import { createAvatar } from '@dicebear/avatars';
 import { isLogin } from '../../utils/routes';
 
 export default function Home() {
@@ -38,9 +39,9 @@ export default function Home() {
         console.log(res.data);
       })
       .catch((err) => {
-        alert("Error occured while fetching profile.");
+        alert('Error occured while fetching profile.');
         console.log(err);
-      })
+      });
   }, [setFormData]);
 
   let svg = createAvatar(style, {
@@ -136,7 +137,11 @@ export default function Home() {
             <p className='text-2xl font-extrabold mt-2'>My Roles</p>
             <div className='my-8 flex flex-row justify-between '>
               {/* <div className='flex flex-col justify-between w-full'> */}
-              <div className={`flex flex-col my-auto${formData.is_setter ? 'hidden' : ' '}`}>
+              <div
+                className={`flex flex-col my-auto${
+                  formData.is_setter ? 'hidden' : ' '
+                }`}
+              >
                 <span className='text-xl text-center font-bold'>
                   Question Setter
                 </span>
@@ -146,7 +151,11 @@ export default function Home() {
               </div>
               {/* </div> */}
               {/* <div className='flex justify-between w-full'> */}
-              <div className={`flex flex-col my-auto${formData.is_reviewer ? 'hidden' : ' '}`}>
+              <div
+                className={`flex flex-col my-auto${
+                  formData.is_reviewer ? 'hidden' : ' '
+                }`}
+              >
                 <span className='text-xl text-center font-bold'>
                   Question Reviewer
                 </span>
@@ -180,13 +189,13 @@ export default function Home() {
               <div className='my-8'>
                 <div className='flex justify-between my-4'>
                   <span className='text-xl font-semibold '>
-                    Total Questions Reviewed by You :
+                    Total Questions Reviewed by You:
                   </span>
                   <span className='text-xl font-bold'>45</span>
                 </div>
                 <div className='flex justify-between my-4'>
                   <span className='text-xl font-semibold '>
-                    Total Questions Set by You :
+                    Total Questions Set by You:
                   </span>
                   <span className='text-xl font-bold'>69</span>
                 </div>

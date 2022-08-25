@@ -11,12 +11,10 @@ export const QuestionContainer = ({
   setQuestionsList,
   questionIndex,
 }) => {
-  const [selectgrade, setSelectGrade] = useState('Select Grade');
   const [othergrade, setOtherGrade] = useState();
-  const [selectsubject, setSelectSubject] = useState('Select Subject');
   const [othersubject, setOtherSubject] = useState();
 
-  const grade = [
+  const grades = [
     '1st',
     '2nd',
     '3rd',
@@ -56,15 +54,6 @@ export const QuestionContainer = ({
   };
 
   const alphabets = ['A', 'B', 'C', 'D'];
-
-  const sendArray = [];
-  const sendData = () => {
-    sendArray.push(selectgrade);
-    sendArray.push(selectsubject);
-    questionsList[questionIndex].tags.map((tag) => {
-      sendArray.push(tag);
-    });
-  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -123,7 +112,7 @@ export const QuestionContainer = ({
           <Menu as='div' className='relative inline-block text-left'>
             <div>
               <Menu.Button className='inline-flex w-full justify-center rounded-md bg-primaryAccent px-4 py-2 text-sm font-medium text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-                {selectgrade}
+                {questionsList[questionIndex].grade}
                 <FiChevronDown
                   className='ml-2 -mr-1 h-5 w-5 text-black'
                   aria-hidden='true'
@@ -141,7 +130,7 @@ export const QuestionContainer = ({
             >
               <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10'>
                 <div className='px-1 py-1'>
-                  {grade.map((topic, index) => {
+                  {grades.map((grade, index) => {
                     return (
                       <Menu.Item key={index}>
                         {({ active }) => (
@@ -150,11 +139,12 @@ export const QuestionContainer = ({
                               active ? 'bg-primary text-white' : 'text-gray-900'
                             } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             onClick={() => {
-                              setSelectGrade(topic);
+                              questionsList[questionIndex].grade = grade;
+                              setQuestionsList([...questionsList]);
                               setOtherGrade('');
                             }}
                           >
-                            {topic}
+                            {grade}
                           </button>
                         )}
                       </Menu.Item>
@@ -165,7 +155,7 @@ export const QuestionContainer = ({
             </Transition>
           </Menu>
           <div className='flex flex-row ml-5'>
-            {selectgrade == 'Other' ? (
+            {questionsList[questionIndex].grade === 'Other' ? (
               <input
                 type='text'
                 className='bg-primaryAccent focus:outline-none text-sm text-primary p-1'
@@ -185,7 +175,7 @@ export const QuestionContainer = ({
           <Menu as='div' className='relative inline-block text-left'>
             <div>
               <Menu.Button className='inline-flex w-full justify-center rounded-md bg-primaryAccent px-4 py-2 text-sm font-medium text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-                {selectsubject}
+                {questionsList[questionIndex].subject}
                 <FiChevronDown
                   className='ml-2 -mr-1 h-5 w-5 text-black'
                   aria-hidden='true'
@@ -212,7 +202,8 @@ export const QuestionContainer = ({
                               active ? 'bg-primary text-white' : 'text-gray-900'
                             } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             onClick={() => {
-                              setSelectSubject(topic);
+                              questionsList[questionIndex].subject = topic;
+                              setQuestionsList([...questionsList]);
                               setOtherSubject('');
                             }}
                           >
@@ -227,7 +218,7 @@ export const QuestionContainer = ({
             </Transition>
           </Menu>
           <div className='flex flex-row ml-5'>
-            {selectsubject == 'Other' ? (
+            {questionsList[questionIndex].subject === 'Other' ? (
               <input
                 type='text'
                 className='bg-primaryAccent focus:outline-none text-sm text-primary p-1'

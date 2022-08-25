@@ -5,9 +5,39 @@ import { FiChevronDown } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 
 export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
-  const topics = ['Physics', 'Chemistry', 'Maths'];
-
+  const topics = [
+    'Hindi',
+    'English',
+    'History',
+    'Geography',
+    'Civics',
+    'Maths',
+    'Science',
+    'Civics',
+    'Information Communication',
+    'Personality Development',
+    'Other',
+  ];
+  const grade = [
+    '1st',
+    '2nd',
+    '3rd',
+    '4th',
+    '5th',
+    '6th',
+    '7th',
+    '8th',
+    '9th',
+    '10th',
+    '11th',
+    '12th',
+    'UG',
+    'PG',
+    'PhD',
+    'Other',
+  ];
   const [selection, setSelection] = useState('Select a Topic');
+  const [gradeSelection, setGradeSelection] = useState('Select a Grade');
 
   const available = {
     easy: 120,
@@ -112,7 +142,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
           <Menu as='div' className='relative inline-block text-left '>
             <div>
               <Menu.Button className='inline-flex w-full justify-center rounded-md bg-primaryAccent px-4 py-2 text-sm font-medium text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-                {selection}
+                {gradeSelection}
                 <FiChevronDown
                   className='ml-2 -mr-1 h-5 w-5 text-black'
                   aria-hidden='true'
@@ -130,7 +160,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             >
               <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                 <div className='px-1 py-1 '>
-                  {topics.map((topic, index) => {
+                  {grade.map((g, index) => {
                     return (
                       <Menu.Item key={index}>
                         {({ active }) => (
@@ -139,10 +169,10 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
                               active ? 'bg-primary text-white' : 'text-gray-900'
                             } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                             onClick={() => {
-                              setSelection(topic);
+                              setGradeSelection(g);
                             }}
                           >
-                            {topic}
+                            {g}
                           </button>
                         )}
                       </Menu.Item>
