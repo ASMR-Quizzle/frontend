@@ -10,14 +10,26 @@ const topicUnit = () => {
     {},
     {
       topicName: '',
+      grade,
       easy: 0,
       medium: 0,
       hard: 0,
+      tags: [],
+      removeTags: [],
     }
   );
 };
 const GenerateQb = () => {
-  const [topicList, setTopicList] = useState([{}]);
+  const [topicList, setTopicList] = useState([
+    {
+      topicName: '',
+      easy: 0,
+      medium: 0,
+      hard: 0,
+      tags: [],
+      removeTags: [],
+    },
+  ]);
   const addTopic = () => {
     setTopicList([...topicList, topicUnit()]);
   };

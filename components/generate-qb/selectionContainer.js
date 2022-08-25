@@ -14,59 +14,145 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
     medium: 90,
     hard: 30,
   };
+  const addTags = () => {
+    console.log(topicList);
+    if (
+      topicList[topicIndex].tags.length === 0 ||
+      topicList[topicIndex].tags[topicList[topicIndex].tags.length - 1] !== ''
+    ) {
+      topicList[topicIndex].tags.push('');
+      setTopicList([...topicList]);
+    }
+  };
+  const addRemoveTags = () => {
+    console.log(topicList);
+    if (
+      topicList[topicIndex].removeTags.length === 0 ||
+      topicList[topicIndex].removeTags[
+        topicList[topicIndex].removeTags.length - 1
+      ] !== ''
+    ) {
+      topicList[topicIndex].removeTags.push('');
+      setTopicList([...topicList]);
+    }
+  };
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    const index = e.target.getAttribute('index');
+    if (
+      topicList[topicIndex][name] === 'easy' ||
+      topicList[topicIndex][name] === 'medium' ||
+      topicList[topicIndex][name] === 'hard'
+    ) {
+      topicList[topicIndex][name] == value;
+    } else {
+      topicList[topicIndex][name][index] = value;
+    }
 
+    console.log(topicList[topicIndex][name]);
+    setTopicList([...topicList]);
+  };
   return (
     <div className='bg-surfacePrimary rounded-md px-8 py-4 my-4 flex flex-col'>
-      <div className='flex'>
-        <label
-          className='block my-auto mb-2 mr-2 text-sm font-medium text-black'
-          htmlFor='easy'
-        >
-          Topic:
-        </label>
-        <Menu as='div' className='relative inline-block text-left'>
-          <div>
-            <Menu.Button className='inline-flex w-full justify-center rounded-md bg-primaryAccent px-4 py-2 text-sm font-medium text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
-              {selection}
-              <FiChevronDown
-                className='ml-2 -mr-1 h-5 w-5 text-black'
-                aria-hidden='true'
-              />
-            </Menu.Button>
-          </div>
-          <Transition
-            as={Fragment}
-            enter='transition ease-out duration-100'
-            enterFrom='transform opacity-0 scale-95'
-            enterTo='transform opacity-100 scale-100'
-            leave='transition ease-in duration-75'
-            leaveFrom='transform opacity-100 scale-100'
-            leaveTo='transform opacity-0 scale-95'
+      <div className='flex mb-2'>
+        <div className='flex justify-between'>
+          <label className='block my-auto mb-2 mr-2 text-sm font-medium text-black'>
+            Topic:
+          </label>
+          <Menu as='div' className='relative inline-block text-left'>
+            <div>
+              <Menu.Button className='inline-flex w-full justify-center rounded-md bg-primaryAccent px-4 py-2 text-sm font-medium text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+                {selection}
+                <FiChevronDown
+                  className='ml-2 -mr-1 h-5 w-5 text-black'
+                  aria-hidden='true'
+                />
+              </Menu.Button>
+            </div>
+            <Transition
+              as={Fragment}
+              enter='transition ease-out duration-100'
+              enterFrom='transform opacity-0 scale-95'
+              enterTo='transform opacity-100 scale-100'
+              leave='transition ease-in duration-75'
+              leaveFrom='transform opacity-100 scale-100'
+              leaveTo='transform opacity-0 scale-95'
+            >
+              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                <div className='px-1 py-1 '>
+                  {topics.map((topic, index) => {
+                    return (
+                      <Menu.Item key={index}>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? 'bg-primary text-white' : 'text-gray-900'
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              setSelection(topic);
+                            }}
+                          >
+                            {topic}
+                          </button>
+                        )}
+                      </Menu.Item>
+                    );
+                  })}
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
+          <label
+            className='block my-auto mb-2 mr-2 text-sm font-medium text-black ml-8'
+            htmlFor='easy'
           >
-            <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-              <div className='px-1 py-1 '>
-                {topics.map((topic, index) => {
-                  return (
-                    <Menu.Item key={index}>
-                      {({ active }) => (
-                        <button
-                          className={`${
-                            active ? 'bg-primary text-white' : 'text-gray-900'
-                          } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                          onClick={() => {
-                            setSelection(topic);
-                          }}
-                        >
-                          {topic}
-                        </button>
-                      )}
-                    </Menu.Item>
-                  );
-                })}
-              </div>
-            </Menu.Items>
-          </Transition>
-        </Menu>
+            Grade:
+          </label>
+          <Menu as='div' className='relative inline-block text-left '>
+            <div>
+              <Menu.Button className='inline-flex w-full justify-center rounded-md bg-primaryAccent px-4 py-2 text-sm font-medium text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+                {selection}
+                <FiChevronDown
+                  className='ml-2 -mr-1 h-5 w-5 text-black'
+                  aria-hidden='true'
+                />
+              </Menu.Button>
+            </div>
+            <Transition
+              as={Fragment}
+              enter='transition ease-out duration-100'
+              enterFrom='transform opacity-0 scale-95'
+              enterTo='transform opacity-100 scale-100'
+              leave='transition ease-in duration-75'
+              leaveFrom='transform opacity-100 scale-100'
+              leaveTo='transform opacity-0 scale-95'
+            >
+              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                <div className='px-1 py-1 '>
+                  {topics.map((topic, index) => {
+                    return (
+                      <Menu.Item key={index}>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? 'bg-primary text-white' : 'text-gray-900'
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              setSelection(topic);
+                            }}
+                          >
+                            {topic}
+                          </button>
+                        )}
+                      </Menu.Item>
+                    );
+                  })}
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
+        </div>
         <MdDelete
           className='ml-auto h-6 w-6 text-statusRed cursor-pointer transition duration-300 ease-in-out transform hover:scale-125 my-auto'
           onClick={() => {
@@ -74,6 +160,86 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             setTopicList([...topicList]);
           }}
         />
+      </div>
+      {/* <br /> */}
+      {/* <hr /> */}
+      <div>
+        <label className='my-auto mb-2 mr-2 text-sm font-medium text-black'>
+          Tags to be added :
+        </label>
+        {topicList[topicIndex].tags &&
+          topicList[topicIndex].tags.map((ele, i) => {
+            return (
+              <button
+                key={i}
+                className='p-1 min-w-fit bg-primaryAccent text-primary rounded-md mt-2'
+              >
+                <input
+                  type='text'
+                  name='tags'
+                  index={i}
+                  className='bg-primaryAccent focus:outline-none placeholder:font-medium placeholder-textSecondary'
+                  onChange={handleChange}
+                  value={topicList[topicIndex].tags[i]}
+                  placeholder='Enter Tag'
+                />
+                <span
+                  className='text-lg font-semibold ml-2 rounded-full'
+                  onClick={() => {
+                    topicList[topicIndex].tags.splice(i, 1);
+                    setTopicList([...topicList]);
+                  }}
+                >
+                  x
+                </span>
+              </button>
+            );
+          })}
+        <button
+          className='p-1 ml-2 bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none'
+          onClick={addTags}
+        >
+          <span className='text-lg font-semibold '>+</span> Add Tag
+        </button>
+      </div>
+      <div>
+        <label className='my-auto mb-2 mr-2 text-sm font-medium text-black'>
+          Excluded Tags :
+        </label>
+        {topicList[topicIndex].removeTags &&
+          topicList[topicIndex].removeTags.map((ele, i) => {
+            return (
+              <button
+                key={i}
+                className='p-1 min-w-fit bg-statusRedAccent text-statusRed rounded-md mt-2'
+              >
+                <input
+                  type='text'
+                  name='removeTags'
+                  index={i}
+                  className='bg-statusRedAccent focus:outline-none placeholder:font-medium placeholder-textSecondary'
+                  onChange={handleChange}
+                  value={topicList[topicIndex].removeTags[i]}
+                  placeholder='Enter Tag'
+                />
+                <span
+                  className='text-lg font-semibold ml-2 rounded-full'
+                  onClick={() => {
+                    topicList[topicIndex].removeTags.splice(i, 1);
+                    setTopicList([...topicList]);
+                  }}
+                >
+                  x
+                </span>
+              </button>
+            );
+          })}
+        <button
+          className='p-1 ml-2 bg-statusRedAccent text-statusRed rounded-md mt-2 focus:outline-none'
+          onClick={addRemoveTags}
+        >
+          <span className='text-lg font-semibold '>+</span> Add Tag
+        </button>
       </div>
       <div className='flex mt-8'>
         <div className='flex-1 mr-4'>
@@ -87,6 +253,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             id='easy'
             className='bg-white text-textPrimary text-sm rounded-lg block w-full p-2 placeholder-slate-500-400'
             type='number'
+            name='easy'
             required
           ></input>
         </div>
@@ -102,6 +269,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             className='bg-white text-textPrimary text-sm rounded-lg block w-full p-2 placeholder-slate-500-400 '
             required
             type='number'
+            name='medium'
           ></input>
         </div>
         <div className='flex-1'>
@@ -115,6 +283,8 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             id='hard'
             className='bg-white text-textPrimary text-sm rounded-lg block w-full p-2 placeholder-slate-500-400 '
             required
+            name='hard'
+            type='number'
           ></input>
         </div>
       </div>
