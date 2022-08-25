@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import { SignUPVector } from '../../utils/icon.export';
+import axiosInstance from '../../utils/axiosInstance';
+import { login } from '../../utils/routes';
 
 // import axios from "axios";
 
@@ -16,8 +18,8 @@ export default function Signup() {
   // });
 
   const [formData, setFormData] = useState({
-    fName: '',
-    lName: '',
+    first_name: '',
+    last_name: '',
     username: '',
     email: '',
     password: '',
@@ -38,6 +40,15 @@ export default function Signup() {
     } else {
       setError('');
     }
+    axiosInstance
+      .post('/user/register', formData)
+      .then((res) => {
+        login(res);
+        window.location.pathname = '/profile';
+      })
+      .catch((err) => {
+        console.log(err);
+      }) 
     console.log(formData);
   };
 
@@ -65,7 +76,7 @@ export default function Signup() {
                   <div className='w-[48%] flex'>
                     <input
                       type='text'
-                      name='fName'
+                      name='first_name'
                       placeholder='First Name'
                       required
                       className='border-textSecondary border rounded-lg focus:border-primary outline-none text-textSecondary text-xs font-light px-4 py-3 flex-1'
@@ -76,7 +87,7 @@ export default function Signup() {
                   <div className='w-[48%] flex'>
                     <input
                       type='text'
-                      name='lName'
+                      name='last_name'
                       placeholder='Last Name'
                       required
                       className='border-textSecondary border rounded-lg focus:border-primary outline-none text-textSecondary text-xs font-light px-4 py-3 flex-1'
@@ -134,15 +145,14 @@ export default function Signup() {
                   </div>
                 </div>
                 <div>{error}</div>
-                <Link href='/profile'>
                   <button
                     type='submit'
                     className='rounded-lg relative inline-flex group items-center justify-center px-3.5 py-2 cursor-pointer bg-gradient-to-tr bg-primary text-white w-full'
+                    onChange={handleFormSubmit}
                   >
                     <div className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-full group-hover:h-32 opacity-10'></div>
                     <div className='relative font-medium'>Create Account</div>
                   </button>
-                </Link>
               </form>
               <p className='text-black pt-3'>
                 Already have an account?

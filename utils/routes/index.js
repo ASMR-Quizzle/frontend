@@ -1,5 +1,4 @@
-const ACCESS_TOKEN_KEY = 'access_token';
-const REFRESH_TOKEN_KEY = 'refresh_token';
+import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../types";
 
 export const login = (res) => {
     localStorage.setItem(ACCESS_TOKEN_KEY, res.data.access.toString());
@@ -12,9 +11,5 @@ export const logout = () => {
 }
 
 export const isLogin = () => {
-    if (localStorage.getItem(ACCESS_TOKEN_KEY)) {
-        return true;
-    }
-
-    return false;
+    return !!(localStorage.getItem(ACCESS_TOKEN_KEY));
 }

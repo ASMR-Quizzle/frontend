@@ -110,18 +110,20 @@ export const Sidebar = ({ isActive }) => {
             </Link>
           </li>
           <li>
-            <div
-              className={`flex cursor-pointer p-4 pl-8 ${
-                isActive['logout'] === true
-                  ? 'bg-slate-300'
-                  : 'hover:bg-primaryAccent'
-              }`}
-            >
-              <div className='mr-4 w-8 my-auto'>
-                <MdOutlineExitToApp className='text-textPrimary h-6 w-6' />
+            <Link href="/logout">
+              <div
+                className={`flex cursor-pointer p-4 pl-8 ${
+                  isActive['logout'] === true
+                    ? 'bg-slate-300'
+                    : 'hover:bg-primaryAccent'
+                }`}
+              >
+                <div className='mr-4 w-8 my-auto'>
+                  <MdOutlineExitToApp className='text-textPrimary h-6 w-6' />
+                </div>
+                <div className='font-normal text-textPrimary text-xl'>Logout</div>
               </div>
-              <div className='font-normal text-textPrimary text-xl'>Logout</div>
-            </div>
+            </Link>
           </li>
         </ul>
       </div>
