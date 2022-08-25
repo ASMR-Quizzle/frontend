@@ -1,8 +1,19 @@
 import Link from 'next/link';
 import { QuizzleLogo } from '../../utils/icon.export.js';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { isLogin } from '../../utils/routes/index.js';
 
 export default function Nav() {
+  const [loginHref, setLoginHref] = useState("/login");
+  const [loginText, setLoginText] = useState("Login");
+
+  useEffect(() => {
+    if (isLogin()) {
+      setLoginHref("/logout");
+      setLoginText("Logout");
+    }
+  }, []);
+
   return (
     <div>
       <nav className='flex items-center justify-between flex-wrap p-5 font-primary fixed w-full bg-white shadow-md'>
@@ -42,12 +53,12 @@ export default function Nav() {
             </a>
           </div>
           <div>
-            <Link href={'/login'}>
+            <Link href={loginHref}>
               <a
                 href='#'
                 className='inline-block font-primary text-lg font-semibold lg:px-8 lg:py-2 px-6 py-2 bg-primary rounded-lg text-white mt-4 lg:mt-0'
               >
-                Login
+                {loginText}
               </a>
             </Link>
           </div>

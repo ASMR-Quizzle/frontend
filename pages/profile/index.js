@@ -6,13 +6,42 @@ import { Sidebar } from '../../components/shared/sidebar';
 import { Slider } from '../../components/sub-components/carousel/carousel';
 import { TestStartModal } from '../../components/test/testStartModal';
 import { createAvatar } from '@dicebear/avatars';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axiosInstance from '../../utils/axiosInstance';
+import { isLogin } from '../../utils/routes';
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    is_setter: false,
+    is_reviewer: false,
+    questions_accepted: 0,
+    questions_reviewed: 0,
+    phone_number: 0,
+  });
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
+
+  useEffect(() => {
+    if (!isLogin()) {
+      window.location.pathname = '/logout';
+      return;
+    }
+    axiosInstance
+      .get('/user/profile')
+      .then((res) => {
+        setFormData(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        alert("Error occured while fetching profile.");
+        console.log(err);
+      })
+  }, [setFormData]);
 
   let svg = createAvatar(style, {
     seed: 'atharva',
@@ -44,7 +73,7 @@ export default function Home() {
                   id='grid-first-name'
                   type='text'
                   placeholder='Jane'
-                  disabled
+                  value={formData.first_name}
                 />
               </div>
               <div className='w-full md:w-1/2 px-3'>
@@ -59,7 +88,7 @@ export default function Home() {
                   id='grid-last-name'
                   type='text'
                   placeholder='Doe'
-                  disabled
+                  value={formData.last_name}
                 />
               </div>
             </div>
@@ -76,7 +105,7 @@ export default function Home() {
                   id='grid-email'
                   type='email'
                   placeholder='abc@gmail.com'
-                  disabled
+                  value={formData.email}
                 />
               </div>
             </div>
@@ -107,7 +136,7 @@ export default function Home() {
             <p className='text-2xl font-extrabold mt-2'>My Roles</p>
             <div className='my-8 flex flex-row justify-between '>
               {/* <div className='flex flex-col justify-between w-full'> */}
-              <div className='flex flex-col my-auto '>
+              <div className={`flex flex-col my-auto${formData.is_setter ? 'hidden' : ' '}`}>
                 <span className='text-xl text-center font-bold'>
                   Question Setter
                 </span>
@@ -117,7 +146,7 @@ export default function Home() {
               </div>
               {/* </div> */}
               {/* <div className='flex justify-between w-full'> */}
-              <div className='flex flex-col my-auto '>
+              <div className={`flex flex-col my-auto${formData.is_reviewer ? 'hidden' : ' '}`}>
                 <span className='text-xl text-center font-bold'>
                   Question Reviewer
                 </span>
