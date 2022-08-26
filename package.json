@@ -23,7 +23,12 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.34.2",
     "react-icons": "^4.4.0",
-    "react-select": "^5.4.0"
+    "react-katex": "^3.0.1",
+    "react-markdown": "^8.0.3",
+    "react-select": "^5.4.0",
+    "react-transliterate": "^1.1.9",
+    "remark-math": "github:remarkjs/remark-math",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

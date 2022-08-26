@@ -12,6 +12,7 @@ const questionUnit = () => {
       description: '',
       subject: 'Select Subject',
       grade: 'Select Grade',
+      board: 'Select Board',
       options: ['', ''],
       answer: -1,
     }
@@ -24,6 +25,7 @@ export default function Home() {
       description: '',
       subject: 'Select Subject',
       grade: 'Select Grade',
+      board: 'Select Board',
       options: ['', ''],
       answer: -1,
     },
@@ -51,6 +53,7 @@ export default function Home() {
     questionsList.map((question, index) => {
       newQuestionsList[index].topics.push(question.subject);
       newQuestionsList[index].topics.push(question.grade);
+      newQuestionsList[index].topics.push(question.board);
       question.tags.forEach((tag) => {
         newQuestionsList[index].topics.push(tag);
       });
@@ -104,6 +107,7 @@ export default function Home() {
         })
         .catch((err) => {
           console.log(err);
+          alert('A similar already exists!');
         });
     });
   };

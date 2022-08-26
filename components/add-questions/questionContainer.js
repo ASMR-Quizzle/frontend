@@ -1,10 +1,15 @@
+import { ActionMeta, OnChangeValue } from 'react-select';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { MdClear, MdDelete } from 'react-icons/md';
 import { Menu, Transition } from '@headlessui/react';
 
 import { BsCheckLg } from 'react-icons/bs';
+import CreatableSelect from 'react-select/creatable';
 import { DeleteModal } from '../shared/delete-modal';
 import { FiChevronDown } from 'react-icons/fi';
+import ReactMarkdown from 'react-markdown';
+import Select from 'react-select';
+import axios from 'axios';
 
 export const QuestionContainer = ({
   questionsList,
@@ -13,6 +18,7 @@ export const QuestionContainer = ({
 }) => {
   const [othergrade, setOtherGrade] = useState();
   const [othersubject, setOtherSubject] = useState();
+  const [otherboard, setOtherBoard] = useState();
 
   const grades = [
     '1st',
@@ -33,6 +39,8 @@ export const QuestionContainer = ({
     'Other',
   ];
 
+  const boards = ['CBSE', 'ICSE', 'State Board', 'CISC', 'Other'];
+
   const subjects = [
     'Hindi',
     'English',
@@ -46,6 +54,21 @@ export const QuestionContainer = ({
     'Personality Development',
     'Other',
   ];
+
+  const options = [];
+
+  axios
+    .get('http://localhost:8000/question/topics')
+    .then((res) => {
+      res.data.data.map((option) => {
+        if (option.question_count > 0) {
+          options.push({ value: option.id, label: option.name });
+        }
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -170,6 +193,69 @@ export const QuestionContainer = ({
         </div>
       </div>
       <div className='flex items-end text-lg mt-4'>
+        <p className='font-bold text-black mr-2 my-auto'>Board:</p>
+        <div className='flex'>
+          <Menu as='div' className='relative inline-block text-left'>
+            <div>
+              <Menu.Button className='inline-flex w-full justify-center rounded-md bg-primaryAccent px-4 py-2 text-sm font-medium text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
+                {questionsList[questionIndex].board}
+                <FiChevronDown
+                  className='ml-2 -mr-1 h-5 w-5 text-black'
+                  aria-hidden='true'
+                />
+              </Menu.Button>
+            </div>
+            <Transition
+              as={Fragment}
+              enter='transition ease-out duration-100'
+              enterFrom='transform opacity-0 scale-95'
+              enterTo='transform opacity-100 scale-100'
+              leave='transition ease-in duration-75'
+              leaveFrom='transform opacity-100 scale-100'
+              leaveTo='transform opacity-0 scale-95'
+            >
+              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10'>
+                <div className='px-1 py-1'>
+                  {boards.map((board, index) => {
+                    return (
+                      <Menu.Item key={index}>
+                        {({ active }) => (
+                          <button
+                            className={`${
+                              active ? 'bg-primary text-white' : 'text-gray-900'
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            onClick={() => {
+                              questionsList[questionIndex].board = board;
+                              setQuestionsList([...questionsList]);
+                              setOtherBoard('');
+                            }}
+                          >
+                            {board}
+                          </button>
+                        )}
+                      </Menu.Item>
+                    );
+                  })}
+                </div>
+              </Menu.Items>
+            </Transition>
+          </Menu>
+          <div className='flex flex-row ml-5'>
+            {questionsList[questionIndex].board === 'Other' ? (
+              <input
+                type='text'
+                className='bg-primaryAccent focus:outline-none text-sm text-primary p-1'
+                placeholder='Other Board'
+                value={otherboard}
+                onChange={(e) => {
+                  setOtherGrade(e.target.value);
+                }}
+              ></input>
+            ) : null}
+          </div>
+        </div>
+      </div>
+      <div className='flex items-end text-lg mt-4'>
         <p className='font-bold text-black mr-2 my-auto'>Subject:</p>
         <div className='flex'>
           <Menu as='div' className='relative inline-block text-left'>
@@ -191,7 +277,7 @@ export const QuestionContainer = ({
               leaveFrom='transform opacity-100 scale-100'
               leaveTo='transform opacity-0 scale-95'
             >
-              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10'>
                 <div className='px-1 py-1 '>
                   {subjects.map((topic, index) => {
                     return (
@@ -232,7 +318,10 @@ export const QuestionContainer = ({
           </div>
         </div>
       </div>
-      <div className='flex flex-wrap space-x-2 space-y-2'>
+      <div className='mt-4'>
+        <CreatableSelect isMulti options={options} />
+      </div>
+      {/* <div className='flex flex-wrap space-x-2 space-y-2 w-full'>
         {questionsList[questionIndex].tags.map((ele, i) => {
           return (
             <button
@@ -260,21 +349,32 @@ export const QuestionContainer = ({
             </button>
           );
         })}
+
         <button
           className='py-2 px-4 bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none'
           onClick={addTags}
         >
           <span className='text-lg font-semibold '>+</span> Add Tags
         </button>
-      </div>
+      </div> }
+      {/* <ReactTransliterate
+        renderComponent={(props) => ( */}
       <textarea
         className='border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 my-4 py-4 px-8 w-[100%] rounded-md resize-y grow '
         rows={5}
-        placeholder='Add your question here'
+        placeholder='Add Question Here [Markdown Supported]'
         onChange={handleChange}
         name='description'
         value={questionsList[questionIndex].description}
       ></textarea>
+      <ReactMarkdown className='mb-3'>
+        {questionsList[questionIndex].description}
+      </ReactMarkdown>
+      {/* )}
+        value={questionsList[questionIndex].description}
+        onChange={handleChange}
+        lang='hi'
+      /> */}
       {questionsList[questionIndex].options.map((ele, i) => {
         return (
           <div key={i}>

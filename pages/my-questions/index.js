@@ -22,7 +22,7 @@ export default function MyQuestions() {
         console.log(err);
       });
     axiosInstance
-      .get('/question/reviewer')
+      .get('/question/reviewer/list')
       .then((res) => {
         setMyReviewQuestions(res.data);
         console.log(res.data);

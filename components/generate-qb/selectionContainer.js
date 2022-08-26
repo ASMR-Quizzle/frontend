@@ -1,17 +1,23 @@
+import { ActionMeta, OnChangeValue } from 'react-select';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 
+import CreatableSelect from 'react-select/creatable';
 import { FiChevronDown } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
+import axios from 'axios';
 
 export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
   const topics = [
+    'Physics',
+    'Chemistry',
+    'Biology',
+    'Mathematics',
     'Hindi',
     'English',
     'History',
     'Geography',
     'Civics',
-    'Maths',
     'Science',
     'Civics',
     'Information Communication',
@@ -44,6 +50,22 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
     medium: 90,
     hard: 30,
   };
+
+  const options = [];
+
+  axios
+    .get('http://localhost:8000/question/topics')
+    .then((res) => {
+      res.data.data.map((option) => {
+        if (option.question_count > 0) {
+          options.push({ value: option.id, label: option.name });
+        }
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+
   const addTags = () => {
     console.log(topicList);
     if (
@@ -109,7 +131,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
               leaveFrom='transform opacity-100 scale-100'
               leaveTo='transform opacity-0 scale-95'
             >
-              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10'>
                 <div className='px-1 py-1 '>
                   {topics.map((topic, index) => {
                     return (
@@ -158,7 +180,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
               leaveFrom='transform opacity-100 scale-100'
               leaveTo='transform opacity-0 scale-95'
             >
-              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+              <Menu.Items className='absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10'>
                 <div className='px-1 py-1 '>
                   {grade.map((g, index) => {
                     return (
@@ -191,13 +213,12 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
           }}
         />
       </div>
-      {/* <br /> */}
-      {/* <hr /> */}
       <div>
         <label className='my-auto mb-2 mr-2 text-sm font-medium text-black'>
           Tags to be added :
         </label>
-        {topicList[topicIndex].tags &&
+        <CreatableSelect isMulti options={options} />
+        {/* {topicList[topicIndex].tags &&
           topicList[topicIndex].tags.map((ele, i) => {
             return (
               <button
@@ -230,13 +251,14 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
           onClick={addTags}
         >
           <span className='text-lg font-semibold '>+</span> Add Tag
-        </button>
+        </button> */}
       </div>
       <div>
         <label className='my-auto mb-2 mr-2 text-sm font-medium text-black'>
           Excluded Tags :
         </label>
-        {topicList[topicIndex].removeTags &&
+        <CreatableSelect isMulti options={options} />
+        {/* {topicList[topicIndex].removeTags &&
           topicList[topicIndex].removeTags.map((ele, i) => {
             return (
               <button
@@ -269,7 +291,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
           onClick={addRemoveTags}
         >
           <span className='text-lg font-semibold '>+</span> Add Tag
-        </button>
+        </button> */}
       </div>
       <div className='flex mt-8'>
         <div className='flex-1 mr-4'>

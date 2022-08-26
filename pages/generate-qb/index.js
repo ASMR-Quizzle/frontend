@@ -20,6 +20,13 @@ const topicUnit = () => {
     }
   );
 };
+// const fetchData = async () => {
+//   data = await axiosInstance.get(
+//     'http://localhost:8000/question/bank?topics=Physics+Chemistry+Mathematics&easy=5+5+5&medium=5+5+5&hard=5+5+5'
+//   );
+//   console.log(data);
+// };
+// useEffect(() => {}, []);
 const GenerateQb = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [topicList, setTopicList] = useState([

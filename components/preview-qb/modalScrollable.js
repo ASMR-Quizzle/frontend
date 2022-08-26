@@ -1,9 +1,9 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import React from 'react';
-import { jsPDF } from 'jspdf';
 import axios from 'axios';
+import { jsPDF } from 'jspdf';
 
 export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
   const [checked, setChecked] = useState([]);
@@ -215,30 +215,43 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                         className='rounded-lg flex items-center justify-center px-3.5 py-2 cursor-pointer bg-primary text-white w-1/2'
                         onClick={() => {
                           const input = document.getElementById('pdf-element');
+                          const answerKey = `<div id="answeer-key"><table><tr><th>Question</th><th>Answer</th></tr>`;
+                          data.map((question, i) => {
+                            answerKey += `<tr><td>${question.id}</td><td>${question.answer}</td></tr>`;
+                          });
+                          answerKey += `</table></div>`;
                           const pdf = new jsPDF({
                             unit: 'px',
                             format: 'a4',
                             userUnit: 'px',
                           });
                           pdf
-                            .html(input, { html2canvas: { scale: 0.57 } })
+                            .html(input, { html2canvas: { scale: 0.3 } })
                             .then(() => {
                               pdf.save('question-bank.pdf');
+                            });
+
+                          const answerPdf = new jsPDF({
+                            unit: 'px',
+                            format: 'a4',
+                            userUnit: 'px',
+                          });
+                          answerPdf
+                            .html(answerKey, { html2canvas: { scale: 0.5 } })
+                            .then(() => {
+                              answerPdf.save('answer-key.pdf');
                             });
                         }}
                       >
                         Download PDF
                       </button>
-                      <button
+                      <a
                         className='rounded-lg flex items-center justify-center px-3.5 py-2 cursor-pointer bg-primary text-white w-1/2'
-                        onClick={() => {
-                          axios.get(
-                            'https://localhost:8000/question/bank?topics=Physics+Chemistry+Mathematics&easy=5+5+5&medium=5+5+5&hard=5+5+5&type=csv'
-                          );
-                        }}
+                        href='http://localhost:8000/question/bank?topics=Physics+Chemistry+Mathematics&easy=5+5+5&medium=5+5+5&hard=5+5+5&type=csv'
+                        target='_blank'
                       >
-                        Download CSV
-                      </button>
+                        <button>Download CSV</button>
+                      </a>
                     </div>
                   </div>
                 )}
