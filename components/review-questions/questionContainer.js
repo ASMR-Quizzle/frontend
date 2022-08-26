@@ -1,17 +1,24 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 import axiosInstance from '../../utils/axiosInstance';
 
 //A card which iterates
 
 export const QuestionContainer = ({ questionIdx, questions, setQuestion }) => {
+  const error = (msg) => toast.error(msg);
+  const success = (msg) => toast.success(msg);
   const onSubmitReview = () => {
     axiosInstance
       .post('/question/review', questions[questionIdx])
       .then((res) => {
         console.log(res.data);
+        success('Question Submitted for review');
       })
       .catch((err) => {
+        error('Error Occured while submitting review');
         console.log(err);
       });
   };
@@ -24,7 +31,10 @@ export const QuestionContainer = ({ questionIdx, questions, setQuestion }) => {
       <div className='flex flex-wrap space-x-2 space-y-2'>
         {questions[questionIdx].topics.map((topic, idx) => {
           return (
-            <span className='bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none placeholder-textSecondary placeholder:italic py-2 px-4 min-w-fit' key={idx}>
+            <span
+              className='bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none placeholder-textSecondary placeholder:italic py-2 px-4 min-w-fit'
+              key={idx}
+            >
               {topic}
             </span>
           );
@@ -161,8 +171,8 @@ export const QuestionContainer = ({ questionIdx, questions, setQuestion }) => {
           <input
             type='range'
             min='0'
-            max='10'
-            step='0.01'
+            max='100'
+            step='1'
             className='w-full mr-5'
             value={questions[questionIdx].difficulty_score}
             onChange={(e) => {
@@ -182,7 +192,7 @@ export const QuestionContainer = ({ questionIdx, questions, setQuestion }) => {
             type='range'
             min='0'
             max='100'
-            step='0.01'
+            step='1'
             className='w-full mr-5'
             value={questions[questionIdx].acceptance_score}
             onChange={(e) => {
@@ -221,6 +231,7 @@ export const QuestionContainer = ({ questionIdx, questions, setQuestion }) => {
           Submit Review
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 };

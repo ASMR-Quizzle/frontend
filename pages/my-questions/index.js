@@ -1,3 +1,5 @@
+import { IS_REVIEWER_KEY, IS_SETTER_KEY } from '../../utils/types';
+
 import { QuestionContainer } from '../../components/my-questions/questionContainer';
 import React from 'react';
 import { Sidebar } from '../../components/shared/sidebar';
@@ -11,6 +13,13 @@ function classNames(...classes) {
 export default function MyQuestions() {
   const [myQuestions, setMyQuestions] = React.useState([]);
   const [myReviewQuestions, setMyReviewQuestions] = React.useState([]);
+  const [isReviewer, setIsReviewer] = React.useState(false);
+  const [isSetter, setIsSetter] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsSetter(JSON.parse(sessionStorage.getItem(IS_SETTER_KEY)));
+    setIsReviewer(JSON.parse(sessionStorage.getItem(IS_REVIEWER_KEY)));
+  }, [setIsReviewer, setIsSetter]);
 
   React.useEffect(() => {
     axiosInstance
@@ -76,7 +85,8 @@ export default function MyQuestions() {
               key='reviewer'
               className={classNames(
                 'rounded-xl bg-white',
-                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none'
+                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none',
+                `${isReviewer ? '' : 'hidden'}`
               )}
             >
               {myReviewQuestions &&
@@ -88,7 +98,8 @@ export default function MyQuestions() {
               key='setter'
               className={classNames(
                 'rounded-xl bg-white',
-                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none'
+                'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none',
+                `${isSetter ? '' : 'hidden'}`
               )}
             >
               {myQuestions &&

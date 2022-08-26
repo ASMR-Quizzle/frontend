@@ -1,6 +1,10 @@
+import 'katex/dist/katex.min.css';
+
+import { BlockMath, InlineMath } from 'react-katex';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 
+import Latex from 'react-latex-next';
 import React from 'react';
 import axios from 'axios';
 import { jsPDF } from 'jspdf';
@@ -8,6 +12,8 @@ import { jsPDF } from 'jspdf';
 export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
   const [checked, setChecked] = useState([]);
   const [isFiltered, setIsFiltered] = useState(false);
+  const [searchState, setSearchState] = useState([]);
+  const [input, setInput] = useState('');
   useEffect(() => {
     for (let i = 0; i < data.length; i++) {
       checked.push(true);
@@ -54,6 +60,14 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                 {console.log(isFiltered)}
                 {isFiltered === false ? (
                   <div className='overflow-y-auto'>
+                    <div>
+                      <input
+                        className='p-2 mt-2'
+                        p
+                        value={input}
+                        onChange={(e) => {}}
+                      />{' '}
+                    </div>
                     {data.map((ele, i) => {
                       return (
                         <div className='flex flex-row space-x-4' key={i}>
@@ -72,7 +86,7 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                             </div>
 
                             <p className='py-4 w-[100%] grow text-textPrimary'>
-                              {data[i].question}
+                              <Latex>{data[i].question}</Latex>
                             </p>
                             <div className='flex flex-row'>
                               <div className='flex flex-row w-1/2'>
@@ -83,7 +97,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                 </div>
                                 {/* <div className=''> */}
                                 <p className='text-textPrimary my-auto mx-4'>
-                                  {data[i].A}
+                                  <Latex>
+                                    {data[i].A.startsWith('\\(')
+                                      ? data[i].A + ')'
+                                      : data[i].A}
+                                  </Latex>
                                 </p>
                               </div>
                               {/* </div> */}
@@ -95,7 +113,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                 </div>
                                 {/* <div className='flex-grow flex'> */}
                                 <p className='text-textPrimary my-auto mx-4'>
-                                  {data[i].B}
+                                  <Latex>
+                                    {data[i].B.startsWith('\\(')
+                                      ? data[i].B + ')'
+                                      : data[i].B}
+                                  </Latex>
                                 </p>
                                 {/* </div> */}
                               </div>
@@ -109,7 +131,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                 </div>
                                 {/* <div className=''> */}
                                 <p className='text-textPrimary my-auto mx-4'>
-                                  {data[i].C}
+                                  <Latex>
+                                    {data[i].C.startsWith('\\(')
+                                      ? data[i].C + ')'
+                                      : data[i].C}
+                                  </Latex>
                                 </p>
                               </div>
                               {/* </div> */}
@@ -121,7 +147,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                 </div>
                                 {/* <div className='flex-grow flex'> */}
                                 <p className='text-textPrimary my-auto mx-4'>
-                                  {data[i].D}
+                                  <Latex>
+                                    {data[i].D.startsWith('\\(')
+                                      ? data[i].D + ')'
+                                      : data[i].D}
+                                  </Latex>
                                 </p>
                                 {/* </div> */}
                               </div>
@@ -151,7 +181,7 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                               </div>
 
                               <p className='py-4 w-[100%] grow text-textPrimary'>
-                                {data[i].question}
+                                <Latex>{data[i].question}</Latex>
                               </p>
                               <div className='flex flex-row'>
                                 <div className='flex flex-row w-1/2'>
@@ -162,7 +192,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                   </div>
                                   {/* <div className=''> */}
                                   <p className='text-textPrimary my-auto mx-4'>
-                                    {data[i].A}
+                                    <Latex>
+                                      {data[i].A.startsWith('\\(')
+                                        ? data[i].A + ')'
+                                        : data[i].A}
+                                    </Latex>
                                   </p>
                                 </div>
                                 {/* </div> */}
@@ -174,7 +208,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                   </div>
                                   {/* <div className='flex-grow flex'> */}
                                   <p className='text-textPrimary my-auto mx-4'>
-                                    {data[i].B}
+                                    <Latex>
+                                      {data[i].B.startsWith('\\(')
+                                        ? data[i].B + ')'
+                                        : data[i].B}
+                                    </Latex>
                                   </p>
                                   {/* </div> */}
                                 </div>
@@ -188,7 +226,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                   </div>
                                   {/* <div className=''> */}
                                   <p className='text-textPrimary my-auto mx-4'>
-                                    {data[i].C}
+                                    <Latex>
+                                      {data[i].C.startsWith('\\(')
+                                        ? data[i].C + ')'
+                                        : data[i].C}
+                                    </Latex>
                                   </p>
                                 </div>
                                 {/* </div> */}
@@ -200,7 +242,11 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                                   </div>
                                   {/* <div className='flex-grow flex'> */}
                                   <p className='text-textPrimary my-auto mx-4'>
-                                    {data[i].D}
+                                    <Latex>
+                                      {data[i].D.startsWith('\\(')
+                                        ? data[i].D + ')'
+                                        : data[i].D}
+                                    </Latex>
                                   </p>
                                   {/* </div> */}
                                 </div>
@@ -248,7 +294,8 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                       <a
                         className='rounded-lg flex items-center justify-center px-3.5 py-2 cursor-pointer bg-primary text-white w-1/2'
                         href='http://localhost:8000/question/bank?topics=Physics+Chemistry+Mathematics&easy=5+5+5&medium=5+5+5&hard=5+5+5&type=csv'
-                        target='_blank' rel="noreferrer"
+                        target='_blank'
+                        rel='noreferrer'
                       >
                         <button>Download CSV</button>
                       </a>

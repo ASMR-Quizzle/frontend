@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import { ModalScrollable } from '../../components/preview-qb/modalScrollable';
 import { QuizzleLogo } from '../../utils/icon.export';
 import { SelectionContainer } from '../../components/generate-qb/selectionContainer';
+import axios from 'axios';
 import generateQbList from '../../data/generateQbRes';
 
 const topicUnit = () => {
@@ -20,14 +21,9 @@ const topicUnit = () => {
     }
   );
 };
-// const fetchData = async () => {
-//   data = await axiosInstance.get(
-//     'http://localhost:8000/question/bank?topics=Physics+Chemistry+Mathematics&easy=5+5+5&medium=5+5+5&hard=5+5+5'
-//   );
-//   console.log(data);
-// };
-// useEffect(() => {}, []);
 const GenerateQb = () => {
+  let res = [];
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [topicList, setTopicList] = useState([
     {
@@ -39,12 +35,32 @@ const GenerateQb = () => {
       removeTags: [],
     },
   ]);
+
   const addTopic = () => {
     setTopicList([...topicList, topicUnit()]);
   };
   const toggleModal = () => {
+    // let data = [];
+    // for (let i = 0; i < topicList.length; i++) {
+    //   if (topicList[i].topicName !== '') {
+    //     topicList[i].tags.push(topicList[i].topicName);
+    //   }
+
+    //   data.push({
+    //     easy: topicList[i].easy,
+    //     medium: topicList[i].medium,
+    //     hard: topicList[i].hard,
+    //     tags: topicList[i].tags,
+    //   });
+    // }
+    // console.log(topicList);
+    // axios
+    //   .post('http://localhost:8000/question/bank', (data = { topics: data }))
+    //   .then((res) => console.log(res))
     setModalIsOpen(!modalIsOpen);
+    // .catch((err) => console.log(err));
   };
+
   return (
     <div>
       {modalIsOpen ? (

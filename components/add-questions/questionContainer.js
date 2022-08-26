@@ -1,15 +1,27 @@
+import 'katex/dist/katex.min.css';
+
 import { ActionMeta, OnChangeValue } from 'react-select';
+import { BlockMath, InlineMath } from 'react-katex';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { MdClear, MdDelete } from 'react-icons/md';
 import { Menu, Transition } from '@headlessui/react';
-
+import axiosInstance from '../../utils/axiosInstance';
+import { BASE_URL } from '../../utils/types';
 import { BsCheckLg } from 'react-icons/bs';
 import CreatableSelect from 'react-select/creatable';
 import { DeleteModal } from '../shared/delete-modal';
 import { FiChevronDown } from 'react-icons/fi';
-import ReactMarkdown from 'react-markdown';
-import Select from 'react-select';
+// import ReactMarkdown from 'react-markdown';
+// import RemarkMathPlugin from 'remark-math';
+import Latex from 'react-latex-next';
+// import Select from 'react-select';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+
+// import rehypeKatex from 'rehype-katex';
+// import rehypeMathjax from 'rehype-mathjax';
+
+// import remarkMath from 'remark-math';
 
 export const QuestionContainer = ({
   questionsList,
@@ -19,6 +31,26 @@ export const QuestionContainer = ({
   const [othergrade, setOtherGrade] = useState();
   const [othersubject, setOtherSubject] = useState();
   const [otherboard, setOtherBoard] = useState();
+  const error = (msg) => toast.error(msg);
+  const success = (msg) => toast.success(msg);
+  const checkDedup = () => {
+    console.log(questionsList[questionIndex].description);
+    axiosInstance
+      .post('/question/dedup', {
+        question: questionsList[questionIndex].description,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.is_dup) {
+          error('A similar question already exists in the Database');
+        } else {
+          success('Question is Valid');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const grades = [
     '1st',
@@ -58,7 +90,7 @@ export const QuestionContainer = ({
   const options = [];
 
   axios
-    .get('http://localhost:8000/question/topics')
+    .get(BASE_URL + '/question/topics')
     .then((res) => {
       res.data.data.map((option) => {
         if (option.question_count > 0) {
@@ -88,7 +120,12 @@ export const QuestionContainer = ({
     } else {
       questionsList[questionIndex][name][index] = value;
     }
-    console.log(questionsList[questionIndex][name]);
+    setQuestionsList([...questionsList]);
+  };
+
+  const handleSelectChange = (e) => {
+    let topics = Array.from(e.map((o) => o.label));
+    questionsList[questionIndex].tags = topics;
     setQuestionsList([...questionsList]);
   };
 
@@ -120,6 +157,7 @@ export const QuestionContainer = ({
           modalIsOpen={modalIsOpen}
         />
       ) : null}
+      <ToastContainer />
       <div className='flex justify-between'>
         <div className='text-xl font-bold '>
           {`Question ${questionIndex + 1} `}
@@ -319,7 +357,13 @@ export const QuestionContainer = ({
         </div>
       </div>
       <div className='mt-4'>
-        <CreatableSelect isMulti options={options} />
+        <CreatableSelect
+          isMulti
+          options={options}
+          onChange={(e) => {
+            handleSelectChange(e);
+          }}
+        />
       </div>
       {/* <div className='flex flex-wrap space-x-2 space-y-2 w-full'>
         {questionsList[questionIndex].tags.map((ele, i) => {
@@ -367,9 +411,7 @@ export const QuestionContainer = ({
         name='description'
         value={questionsList[questionIndex].description}
       ></textarea>
-      <ReactMarkdown className='mb-3'>
-        {questionsList[questionIndex].description}
-      </ReactMarkdown>
+      <Latex>{questionsList[questionIndex].description}</Latex>
       {/* )}
         value={questionsList[questionIndex].description}
         onChange={handleChange}
@@ -439,6 +481,9 @@ export const QuestionContainer = ({
           <span className='my-auto'>Add Option</span>
         </div>
       )}
+      <span onClick={checkDedup} className='text-red-300 cursor-pointer'>
+        Check Duplicates
+      </span>
     </div>
   );
 };

@@ -91,6 +91,8 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
+    console.log(value);
+    console.log(name);
     const index = e.target.getAttribute('index');
     if (
       topicList[topicIndex][name] === 'easy' ||
@@ -98,13 +100,27 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
       topicList[topicIndex][name] === 'hard'
     ) {
       topicList[topicIndex][name] == value;
-    } else {
-      topicList[topicIndex][name][index] = value;
     }
+    //else {
+    //   topicList[topicIndex][name][index] = value;
+    // }
 
     console.log(topicList[topicIndex][name]);
     setTopicList([...topicList]);
   };
+
+  const onAddTagsChange = (e) => {
+    let topics = Array.from(e.map((o) => o.label));
+    topicList[topicIndex].tags = topics;
+    setTopicList([...topicList]);
+  };
+
+  const onExcludeTagsChange = (e) => {
+    let topics = Array.from(e.map((o) => o.label));
+    topicList[topicIndex].removeTags = topics;
+    setTopicList([...topicList]);
+  };
+
   return (
     <div className='bg-surfacePrimary rounded-md px-8 py-4 my-4 flex flex-col'>
       <div className='flex mb-2'>
@@ -215,9 +231,14 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
       </div>
       <div>
         <label className='my-auto mb-2 mr-2 text-sm font-medium text-black'>
-          Tags to be added :
+          Tags to be added:
         </label>
-        <CreatableSelect isMulti options={options} />
+        <CreatableSelect
+          isMulti
+          options={options}
+          isValidNewOption={() => false}
+          onChange={onAddTagsChange}
+        />
         {/* {topicList[topicIndex].tags &&
           topicList[topicIndex].tags.map((ele, i) => {
             return (
@@ -255,9 +276,14 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
       </div>
       <div>
         <label className='my-auto mb-2 mr-2 text-sm font-medium text-black'>
-          Excluded Tags :
+          Excluded Tags:
         </label>
-        <CreatableSelect isMulti options={options} />
+        <CreatableSelect
+          isMulti
+          options={options}
+          isValidNewOption={() => false}
+          onChange={onExcludeTagsChange}
+        />
         {/* {topicList[topicIndex].removeTags &&
           topicList[topicIndex].removeTags.map((ele, i) => {
             return (
@@ -307,6 +333,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             type='number'
             name='easy'
             required
+            onChange={handleChange}
           ></input>
         </div>
         <div className='flex-1 mr-4'>
@@ -322,6 +349,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             required
             type='number'
             name='medium'
+            onChange={handleChange}
           ></input>
         </div>
         <div className='flex-1'>
@@ -337,6 +365,7 @@ export const SelectionContainer = ({ topicList, setTopicList, topicIndex }) => {
             required
             name='hard'
             type='number'
+            onChange={handleChange}
           ></input>
         </div>
       </div>

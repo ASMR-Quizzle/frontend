@@ -1,5 +1,6 @@
 import * as style from '@dicebear/avatars-jdenticon-sprites';
 
+import { IS_REVIEWER_KEY, IS_SETTER_KEY } from '../../utils/types';
 import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
@@ -37,9 +38,17 @@ export default function Home() {
       .then((res) => {
         setFormData(res.data);
         console.log(res.data);
+        sessionStorage.setItem(
+          IS_REVIEWER_KEY,
+          JSON.stringify(res.data.is_reviewer)
+        );
+        sessionStorage.setItem(
+          IS_SETTER_KEY,
+          JSON.stringify(res.data.is_setter)
+        );
       })
       .catch((err) => {
-        alert('Error occured while fetching profile.');
+        // alert('Error occured while fetching profile.');
         console.log(err);
       });
   }, [setFormData]);
@@ -191,13 +200,17 @@ export default function Home() {
                   <span className='text-xl font-semibold '>
                     Total Questions Reviewed by You:
                   </span>
-                  <span className='text-xl font-bold'>45</span>
+                  <span className='text-xl font-bold'>
+                    {formData.questions_reviewed}
+                  </span>
                 </div>
                 <div className='flex justify-between my-4'>
                   <span className='text-xl font-semibold '>
                     Total Questions Set by You:
                   </span>
-                  <span className='text-xl font-bold'>69</span>
+                  <span className='text-xl font-bold'>
+                    {formData.questions_submitted}
+                  </span>
                 </div>
               </div>
             </div>

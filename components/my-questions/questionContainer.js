@@ -128,7 +128,7 @@ export const QuestionContainer = ({ question }) => {
           <div className='flex-grow my-auto bg-slate-300 rounded-full h-2.5 mr-8'>
             <div
               className='bg-primary h-2.5 rounded-full'
-              style={{ width: `${question.difficulty_score}%` }}
+              style={{ width: `${question.difficulty_score * 10}%` }}
             ></div>
           </div>
         </div>
