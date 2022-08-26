@@ -248,7 +248,7 @@ export const ModalScrollable = ({ data, toggleModal, modalIsOpen }) => {
                       <a
                         className='rounded-lg flex items-center justify-center px-3.5 py-2 cursor-pointer bg-primary text-white w-1/2'
                         href='http://localhost:8000/question/bank?topics=Physics+Chemistry+Mathematics&easy=5+5+5&medium=5+5+5&hard=5+5+5&type=csv'
-                        target='_blank'
+                        target='_blank' rel="noreferrer"
                       >
                         <button>Download CSV</button>
                       </a>

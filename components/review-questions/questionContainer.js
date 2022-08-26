@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import axiosInstance from '../../utils/axiosInstance';
+
 //A card which iterates
 
 export const QuestionContainer = ({ questionIdx, questions, setQuestion }) => {
@@ -21,9 +22,9 @@ export const QuestionContainer = ({ questionIdx, questions, setQuestion }) => {
         <div className='text-xl font-bold '>{`Question ID ${questions[questionIdx].id} `}</div>
       </div>
       <div className='flex flex-wrap space-x-2 space-y-2'>
-        {questions[questionIdx].topics.map((topic) => {
+        {questions[questionIdx].topics.map((topic, idx) => {
           return (
-            <span className='bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none placeholder-textSecondary placeholder:italic py-2 px-4 min-w-fit'>
+            <span className='bg-primaryAccent text-primary rounded-md mt-2 focus:outline-none placeholder-textSecondary placeholder:italic py-2 px-4 min-w-fit' key={idx}>
               {topic}
             </span>
           );

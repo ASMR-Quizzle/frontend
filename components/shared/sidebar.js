@@ -1,7 +1,6 @@
 import { BsPlusLg } from 'react-icons/bs';
 import { FaClipboardList } from 'react-icons/fa';
 import { FaUserAlt } from 'react-icons/fa';
-import { IoMdSettings } from 'react-icons/io';
 import Link from 'next/link';
 import { MdOutlineExitToApp } from 'react-icons/md';
 import { MdRateReview } from 'react-icons/md';
@@ -69,24 +68,6 @@ export const Sidebar = ({ isActive }) => {
               </div>
             </Link>
           </li>
-          {/* <li>
-            <Link href='/settings'>
-              <div
-                className={`flex cursor-pointer p-4 pl-8 ${
-                  isActive['settings'] === true
-                    ? 'bg-slate-300'
-                    : 'hover:bg-primaryAccent'
-                }`}
-              >
-                <div className='mr-4 w-8 my-auto'>
-                  <IoMdSettings className='text-textPrimary h-6 w-6' />
-                </div>
-                <div className='font-normal text-textPrimary text-xl my-auto'>
-                  Settings
-                </div>
-              </div>
-            </Link>
-          </li> */}
         </ul>
       </div>
       <div className='mt-auto mb-8'>
